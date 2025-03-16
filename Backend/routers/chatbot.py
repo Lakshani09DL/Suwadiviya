@@ -18,4 +18,4 @@ gmaps = googlemaps.Client(key=GOOGLE_MAPS_API_KEY)
 MONGO_URI = "mongodb://your_mongodb_url"
 client = MongoClient(MONGO_URI)
 db = client["suwadiviya"]
-hospitals_collection = db["hospitals"]
+hospitals_collection = db["Hospital"]
