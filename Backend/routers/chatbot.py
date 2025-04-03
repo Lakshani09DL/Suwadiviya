@@ -1,21 +1,33 @@
-from fastapi import APIRouter, Query
-from pymongo import MongoClient
-import google.generativeai as genai
-import googlemaps
+from fastapi import APIRouter
+from pydantic import BaseModel
+from google import genai
+from dotenv import load_dotenv
+import os
 
+
+load_dotenv()
 
 router = APIRouter()
 
-GEMINI_API_KEY = "your_gemini_api_key"
-genai.configure(api_key=GEMINI_API_KEY)
-model = genai.GenerativeModel("gemini-pro")
+# Configure Gemini API
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+client = genai.Client(api_key=GEMINI_API_KEY)
 
-# Google Maps API Key
-GOOGLE_MAPS_API_KEY = "your_google_maps_api_key"
-gmaps = googlemaps.Client(key=GOOGLE_MAPS_API_KEY)
 
-# MongoDB Connection 
-MONGO_URI = "mongodb://your_mongodb_url"
-client = MongoClient(MONGO_URI)
-db = client["suwadiviya"]
-hospitals_collection = db["hospitals"]
+class ChatRequest(BaseModel):
+    query: str
+
+@router.post("/chat")
+async def chat_with_gemini(request: ChatRequest):
+    """
+    POST endpoint to chat with Gemini AI.
+    - Accepts JSON input with {"query": "your message"}
+    - Returns AI-generated response
+    """
+    try:
+        response = client.models.generate_content(
+            model="gemini-2.0-flash", contents=request.query
+        )
+        return {"response": response.text}
+    except Exception as e:
+        return {"error": str(e)}

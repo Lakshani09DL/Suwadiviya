@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from routers import chatbot
 
 app = FastAPI()
-app.include_router(chatbot.router, prefix=['/chatbot'],tags=['Chatbot'])
+app.include_router(chatbot.router, prefix='/api',tags=['Chatbot'])
 
 
 if __name__ == "__main__":
