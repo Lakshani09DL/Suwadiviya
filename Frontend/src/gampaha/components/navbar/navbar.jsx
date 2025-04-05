@@ -12,17 +12,17 @@ function Navbar() {
     };
 
     return (
-        <div className="Navbar bg-white shadow-sm px-6 py-2 flex justify-between items-center">
+        <div className="Navbar bg-white shadow-sm px-10 py-10 flex justify-between items-center">
             <div className="Left flex items-center gap-4">
-                <span className="text-2xl text-blue-600 font-bold">SuwaDiviya</span>
-                <div className="Search hidden md:flex items-center border border-gray-300 rounded px-2 py-0.5 bg-gray-100">
+                <span className="text-4xl text-blue-600 font-bold">SuwaDiviya</span>
+                {/* <div className="Search hidden md:flex items-center border border-gray-300 rounded px-2 py-0.5 bg-gray-100">
                     <SearchIcon className="text-gray-500 text-sm" />
                     <input
                         type="text"
                         placeholder="Search"
                         className="ml-2 bg-transparent outline-none text-sm h-8"
                     />
-                </div>
+                </div> */}
             </div>
 
             {/* Desktop Navigation */}
