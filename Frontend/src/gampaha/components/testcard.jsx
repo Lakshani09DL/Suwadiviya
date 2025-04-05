@@ -13,7 +13,7 @@ function Testcard() {
                     Explore a wide range of diagnostic tests available at our hospital
                 </span>
                 <Link to={"/gampaha/scans"}>
-                    <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+                    <button className="bg-blue-600 text-white px-3 py-2 text-base rounded hover:bg-blue-700 transition">
                         Visit Page
                     </button>
                 </Link>

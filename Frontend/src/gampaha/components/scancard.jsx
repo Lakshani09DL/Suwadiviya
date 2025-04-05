@@ -13,7 +13,7 @@ function Scancard() {
                     Discover various diagnostic scans available to detect health conditions early
                 </span>
                 <Link to={"/gampaha/scans"}>
-                    <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+                    <button className="bg-blue-600 text-white px-3 py-2 text-base rounded hover:bg-blue-700 transition">
                         Visit Page
                     </button>
                 </Link>

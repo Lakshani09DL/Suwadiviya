@@ -167,13 +167,13 @@ function GampahaHome() {
 
 
       <motion.h2
-        className="text-4xl font-bold text-white text-center"
+        className="bg-slate-900 p-10 text-4xl font-bold text-white text-center"
         variants={itemVariants}>
         Our Services
       </motion.h2>
 
       {/* Cards Section with Hover Effects */}
-      <div className="flex flex-row justify-center p-5 space-x-6">
+      <div className="bg-slate-900 flex flex-row justify-center p-5 space-x-6">
         <AnimatePresence mode="wait">
         <motion.div
           key={cards[currentCard].id}
