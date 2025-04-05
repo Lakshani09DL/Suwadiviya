@@ -1,8 +1,9 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "../components/navbar/navbar";
 import Cliniccard from "../components/cliniccard";
 import Testcard from "../components/testcard";
 import Scancard from "../components/scancard";
+import { useEffect, useState } from "react";
 
 // Animation variants
 const cardVariants = {
@@ -10,7 +11,7 @@ const cardVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5 }
+    transition: { duration: 0.3, ease: "easeOut" }
   },
   hover: {
     scale: 1.02,
@@ -19,22 +20,29 @@ const cardVariants = {
   }
 };
 
+
 const popupVariants = {
   hidden: { opacity: 0, y: 10 },
   visible: { opacity: 1, y: 0 }
 };
 // Animation variants
 const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        when: "beforeChildren"
-      }
+  hidden: {
+    opacity: 0,
+    x: -50 // start off-screen to the left
+  },
+  visible: {
+    opacity: 1,
+    x: 0, // slide into place
+    transition: {
+      type: "spring",
+      stiffness: 50,
+      staggerChildren: 0.5,
+      when: "beforeChildren"
     }
-  };
-  
+  }
+};
+
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
     visible: {
@@ -55,16 +63,45 @@ const containerVariants = {
       scale: 1,
       opacity: 1,
       transition: {
-        duration: 1,
+        duration: 0.6,
         ease: "anticipate"
       }
     }
   };
 
 
+  const slideVariants = {
+    initial: { opacity: 0, x: 100 },
+    animate: { opacity: 1, x: 0 },
+    exit: { opacity: 0, x: -100 }
+  };
+
+
+  const cards = [
+    { id: 1, component: <Cliniccard /> },
+    { id: 2, component: <Testcard /> },
+    { id: 3, component: <Scancard /> },
+  ];
 
 
 function GampahaHome() {
+
+  // state to manage the current card to be displayed
+  const [currentCard, setCurrentCard] = useState(0);
+
+    useEffect(() => {
+      const interval = setInterval(() => {
+        setCurrentCard((prev) => (prev + 1) % cards.length);
+      }, 5000);
+      return () => clearInterval(interval);
+    }, []);
+
+  // visible cards
+  const visibleCards = [
+    cards[currentCard % cards.length],
+    cards[(currentCard + 1) % cards.length],
+  ]
+
   return (
     <>
       <Navbar />
@@ -128,41 +165,42 @@ function GampahaHome() {
         </motion.div>
       </motion.div>
 
+
+      <motion.h2
+        className="text-4xl font-bold text-white text-center"
+        variants={itemVariants}>
+        Our Services
+      </motion.h2>
+
       {/* Cards Section with Hover Effects */}
-      <div className="space-y-6 p-4">
-        {/* Clinic Card with Popup */}
+      <div className="flex flex-row justify-center p-5 space-x-6">
+        <AnimatePresence mode="wait">
         <motion.div
-          className="relative"
-          initial="hidden"
-          animate="visible"
-          whileHover="hover"
-          variants={cardVariants}
-        >
-        <Cliniccard />
+          key={cards[currentCard].id}
+          className="flex w-full justify-center space-x-4 p-5 shadow-xl rounded-lg text-xl"
+          variants={slideVariants}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          transition={{ duration: 0.6 }}
           
-        </motion.div>
-
-        {/* Test Card with Popup */}
-        <motion.div
-          className="relative"
-          initial="hidden"
-          animate="visible"
-          whileHover="hover"
-          variants={cardVariants}
         >
-          <Testcard />
+          {/* Clinic Card with Popup */}
+          {visibleCards.map((card, index) => (
+              <motion.div
+                key={card.id}
+                variants={slideVariants}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                className="flex flex-row justify-center p-6 space-x-8 w-100 h-80"
+              >
+                {card.component}
+              </motion.div>
+            ))}
         </motion.div>
-
-        {/* Scan Card with Popup */}
-        <motion.div
-          className="relative"
-          initial="hidden"
-          animate="visible"
-          whileHover="hover"
-          variants={cardVariants}
-        >
-          <Scancard />
-        </motion.div>
+        </AnimatePresence>
+        
       </div>
     </>
   );
