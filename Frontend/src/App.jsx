@@ -1,15 +1,24 @@
+// App.jsx
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import './App.css';
-import ChatInterface from './components/ChatInterface';
+
+import ChatInterface from './components/chatbot/ChatInterface';
+
 
 function App() {
   return (
     <div className="App">
-      
-      <ChatInterface/>
+      <Router>
+        <Routes>
+          
+          <Route path="/chat" element={<ChatInterface />} />
+          
+        </Routes>
+      </Router>
     </div>
   );
 }
 
 export default App;
+
