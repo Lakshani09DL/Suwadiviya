@@ -130,7 +130,7 @@ function ColomboHome() {
             className="text-xl text-gray-600"
             variants={itemVariants}
           >
-            Colombo 00700
+            Colombo 
           </motion.span>
           
           <motion.p 
@@ -144,7 +144,7 @@ function ColomboHome() {
             <br/>
             <br/>
 
-            Address : WV99+FHX, Colombo 00700<br/>
+            Address : E. W. Perera mawatha, Colombo 10, Sri Lanka<br/>
             
             Contact : 0112 691 111
           </motion.p>
