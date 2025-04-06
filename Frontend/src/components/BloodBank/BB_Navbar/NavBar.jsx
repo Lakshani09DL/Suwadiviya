@@ -8,8 +8,8 @@ const Navbar = () => {
       <nav className="fixed top-0 left-0 w-full z-50 bg-zinc-50 shadow-md dark:bg-neutral-700">
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
           {/* Logo */}
-          <div className="text-xl font-semibold text-gray-800 dark:text-white">
-            MyApp
+          <div className="text-2xl font-semibold text-gray-800 dark:text-white">
+            <span className="text-primary">Suwa Diviya</span>
           </div>
 
           {/* Hamburger */}
@@ -46,18 +46,19 @@ const Navbar = () => {
 
           {/* Nav Links (Desktop) */}
           <div className="hidden lg:flex space-x-6">
-            <a href="#" className="text-gray-700 dark:text-gray-200 hover:underline">Home</a>
-            <a href="#" className="text-gray-700 dark:text-gray-200 hover:underline">Search</a>
-           
+            <a href="#" className="text-gray-700 dark:text-gray-400 hover:text-primary focus:outline-none transition duration-300">Home</a>
+            <a href="#" className="text-gray-700 dark:text-gray-400 hover:text-primary focus:outline-none transition duration-300">About</a>
+            <a href="#" className="text-gray-700 dark:text-gray-400 hover:text-primary focus:outline-none transition duration-300">Contact</a>
           </div>
         </div>
 
         {/* Nav Links (Mobile) */}
         {isOpen && (
-          <div className="lg:hidden px-4 pb-4">
-            <a href="#" className="block py-2 text-gray-700 dark:text-gray-200 hover:underline">Home</a>
-            <a href="#" className="block py-2 text-gray-700 dark:text-gray-200 hover:underline">Search</a>
-          
+          <div className="lg:hidden px-4 pb-4 bg-neutral-800 text-white rounded-b-lg shadow-lg">
+            <a href="#" className="block py-2 text-gray-500 hover:text-primary focus:outline-none transition duration-300">Home</a>
+            <a href="#" className="block py-2 text-gray-500 hover:text-primary focus:outline-none transition duration-300">Search</a>
+            <a href="#" className="block py-2 text-gray-500 hover:text-primary focus:outline-none transition duration-300">About</a>
+            <a href="#" className="block py-2 text-gray-500 hover:text-primary focus:outline-none transition duration-300">Contact</a>
           </div>
         )}
       </nav>
