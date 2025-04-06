@@ -1,8 +1,10 @@
-# database.py
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine,text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 import os
+from dotenv import load_dotenv
+load_dotenv()
+
 
 # Get your Aiven database connection details
 DB_HOST = os.getenv("DB_HOST")  # e.g., your Aiven host
@@ -15,6 +17,14 @@ DATABASE_URL = f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB
 
 # Create SQLAlchemy engine
 engine = create_engine(DATABASE_URL)
+
+# Test database connection
+try:
+    with engine.connect() as connection:
+        result = connection.execute(text("SELECT 1")) # Execute query and get scalar result
+    print("Database connected successfully.")
+except Exception as e:
+    print(f"Error connecting to database: {e}")
 
 # Create session
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
