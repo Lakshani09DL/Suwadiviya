@@ -24,7 +24,7 @@ class Campaign(Base):
 
     campaign_id = Column(Integer, primary_key=True, index=True)
     location_address = Column(String(50))
-    district = Column(String(50))
+    district = Column(Enum('Ampara', 'Anuradhapura', 'Badulla', 'Batticaloa', 'Colombo', 'Galle', 'Gampaha', 'Hambantota', 'Jaffna', 'Kandy', 'Kegalle', 'Kilinochchi', 'Kurunegala', 'Mannar', 'Kalutara', 'Matale', 'Matara', 'Monaragala', 'Mullaitivu', 'Nuwara Eliya', 'Polonnaruwa', 'Puttalam', 'Ratnapura', 'Trincomalee', 'Vavuniya'))
     province = Column(Enum('Western', 'Central', 'Southern', 'Uva', 'Sabaragamuwa',
                            'North Western', 'North Central', 'Northern', 'Eastern'))
     date_time = Column(DateTime)

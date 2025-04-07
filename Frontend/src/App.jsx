@@ -7,16 +7,13 @@ import GampahaHome from "./gampaha/pages/gampaha_home";
 import Cliniclist from "./gampaha/pages/clinic_list";
 import Scanlist from "./gampaha/pages/scan_list";
 import Testlist from "./gampaha/pages/test_list";
-
-
 import './App.css';
-
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 
 import ChatInterface from './components/chatbot/ChatInterface';
 import BloodBank from './components/BloodBank/Home/home';
-
+import Search from './components/BloodBank/Search/Search'
 function App() {
   return (
     <div className="App">
@@ -29,6 +26,7 @@ function App() {
           <Route path="/gampaha/tests" element={<Testlist />} />
           <Route path="/chat" element={<ChatInterface />} />
           <Route path="/bloodBank" element={<BloodBank />} />
+          <Route path='/search' element={<Search/>}/>
         </Routes>
       </BrowserRouter>
     </div>
