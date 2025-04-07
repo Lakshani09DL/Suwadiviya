@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 #from routers import chatbot
 #from routers import blood_bank
 from routers.gampaha import tests
+from mongodb import init_db
 
 app = FastAPI()
 
@@ -14,6 +15,11 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.on_event("startup")
+async def startup_db_client():
+    await init_db()
+    print("Database connected")
 
 # Include routers
 #app.include_router(chatbot.router, prefix='/chatbot', tags=['Chatbot'])
