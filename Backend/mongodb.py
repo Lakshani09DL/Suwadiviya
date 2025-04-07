@@ -1,6 +1,7 @@
 from beanie import init_beanie
 from motor.motor_asyncio import AsyncIOMotorClient
 from mongo_models.gampaha.gampaha_tests import Tests
+from mongo_models.user.user import User
 import os
 from dotenv import load_dotenv
 
@@ -13,7 +14,7 @@ async def init_db():
 
     await init_beanie(
         database=client.SuwaDiviya, 
-        document_models=[Tests]
+        document_models=[User, Tests]
         )
     
     print("DB Initialized")

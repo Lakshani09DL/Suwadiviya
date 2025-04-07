@@ -7,6 +7,9 @@ class SpecialInformation(BaseModel):
     before_the_scan: Optional[str] = Field(alias="Before the scan")
     after_the_scan: Optional[str] = Field(alias="After the scan")
 
+    class Config:
+        allow_population_by_field_name = True
+
 class Tests(Document):
     name: str
     type: str
@@ -17,4 +20,4 @@ class Tests(Document):
 
     
     class Settings:
-        collection = "gampaha_district_hospital_test&scan_collection"
+        collection = "gampahatests"
