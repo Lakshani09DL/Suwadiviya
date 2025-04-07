@@ -25,7 +25,10 @@ class ScanServiceResponse(BaseModel):
 @router.get("/testlist", response_model=List[ScanServiceResponse])
 async def list_scan_services():
     scan_services = await Tests.find_all().to_list()  # Get all documents
+    
     return scan_services
+
+
 
 
 
