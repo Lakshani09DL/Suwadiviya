@@ -1,6 +1,6 @@
 // App.jsx
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, RouterProvider, createBrowserRouter, Outlet, Navigate, BrowserRouter } from 'react-router-dom';
+//import { BrowserRouter as Router, Route, Routes, RouterProvider, createBrowserRouter, Outlet, Navigate, BrowserRouter } from 'react-router-dom';
 
 import Home from "./gampaha/pages/home";
 import GampahaHome from "./gampaha/pages/gampaha_home";
@@ -17,7 +17,7 @@ import Search from './components/BloodBank/Search/Search'
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
+      <Router>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/gampaha" element={<GampahaHome />} />
@@ -28,7 +28,7 @@ function App() {
           <Route path="/bloodBank" element={<BloodBank />} />
           <Route path='/search' element={<Search/>}/>
         </Routes>
-      </BrowserRouter>
+      </Router>
     </div>
   );
 }
