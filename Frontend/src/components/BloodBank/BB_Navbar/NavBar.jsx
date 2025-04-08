@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,19 +27,9 @@ const Navbar = () => {
                 xmlns="http://www.w3.org/2000/svg"
               >
                 {isOpen ? (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 ) : (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                 )}
               </svg>
             </button>
@@ -46,19 +37,18 @@ const Navbar = () => {
 
           {/* Nav Links (Desktop) */}
           <div className="hidden lg:flex space-x-6">
-            <a href="#" className="text-gray-700 dark:text-gray-400 hover:text-primary focus:outline-none transition duration-300">Home</a>
-            <a href="#" className="text-gray-700 dark:text-gray-400 hover:text-primary focus:outline-none transition duration-300">About</a>
-            <a href="#" className="text-gray-700 dark:text-gray-400 hover:text-primary focus:outline-none transition duration-300">Contact</a>
+            <Link to="/bloodBank" className="text-gray-700 dark:text-gray-400 hover:text-primary transition duration-300">Home</Link>
+            <Link to="/search" className="text-gray-700 dark:text-gray-400 hover:text-primary transition duration-300">Search</Link>
+            <Link to="/contact" className="text-gray-700 dark:text-gray-400 hover:text-primary transition duration-300">Contact</Link>
           </div>
         </div>
 
         {/* Nav Links (Mobile) */}
         {isOpen && (
           <div className="lg:hidden px-4 pb-4 bg-neutral-800 text-white rounded-b-lg shadow-lg">
-            <a href="#" className="block py-2 text-gray-500 hover:text-primary focus:outline-none transition duration-300">Home</a>
-            <a href="#" className="block py-2 text-gray-500 hover:text-primary focus:outline-none transition duration-300">Search</a>
-            <a href="#" className="block py-2 text-gray-500 hover:text-primary focus:outline-none transition duration-300">About</a>
-            <a href="#" className="block py-2 text-gray-500 hover:text-primary focus:outline-none transition duration-300">Contact</a>
+            <Link to="/bloodBank" className="block py-2 text-gray-500 hover:text-primary transition duration-300">Home</Link>
+            <Link to="/search" className="block py-2 text-gray-500 hover:text-primary transition duration-300">Search</Link>
+            <Link to="/contact" className="block py-2 text-gray-500 hover:text-primary transition duration-300">Contact</Link>
           </div>
         )}
       </nav>

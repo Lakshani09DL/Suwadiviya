@@ -1,14 +1,12 @@
 // App.jsx
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, RouterProvider, createBrowserRouter, Outlet, Navigate, BrowserRouter } from 'react-router-dom';
-
 import Home from "./gampaha/pages/home";
 import GampahaHome from "./gampaha/pages/gampaha_home";
 import Cliniclist from "./gampaha/pages/clinic_list";
 import Scanlist from "./gampaha/pages/scan_list";
 import Testlist from "./gampaha/pages/test_list";
 import './App.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter , Routes, Route } from 'react-router-dom';
 
 
 import ChatInterface from './components/chatbot/ChatInterface';
