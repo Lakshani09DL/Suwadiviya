@@ -1,7 +1,5 @@
 // App.jsx
 import React from 'react';
-//import { BrowserRouter as Router, Route, Routes, RouterProvider, createBrowserRouter, Outlet, Navigate, BrowserRouter } from 'react-router-dom';
-
 import Home from "./gampaha/pages/home";
 import GampahaHome from "./gampaha/pages/gampaha_home";
 import Cliniclist from "./gampaha/pages/clinic_list";
@@ -13,7 +11,6 @@ import ColomboHome from "./colombo/pages/colombo_home";
 import ColomboCliniclist from "./colombo/pages/clinic_list";
 import ColomboScanlist from "./colombo/pages/scan_list";
 import ColomboTestlist from "./colombo/pages/test_list";
-
 import './App.css';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 

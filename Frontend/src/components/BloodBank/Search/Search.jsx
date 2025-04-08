@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Navbar from "../BB_Navbar/NavBar";
 
 const CampaignSearch = () => {
   const [districts, setDistricts] = useState([]);
@@ -12,7 +13,6 @@ const CampaignSearch = () => {
     const fetchDistricts = async () => {
       try {
         const response = await axios.get("http://127.0.0.1:8000/blood_bank/districts");
-        // Extract district names from the response
         setDistricts(response.data.map((item) => item.district));
       } catch (err) {
         console.error("Error fetching districts:", err);
@@ -21,36 +21,65 @@ const CampaignSearch = () => {
     };
     fetchDistricts();
   }, []);
-  
+
   const handleSearch = async () => {
-    if (!selectedDistrict || !selectedDate) {
-      setError("Please select both a district and a date.");
+    if (!selectedDistrict && !selectedDate) {
+      setError("Please select at least one filter.");
       return;
     }
 
+    let url = "";
+    let params = {};
+
+    if (selectedDistrict && selectedDate) {
+      url = "http://127.0.0.1:8000/blood_bank/get-campaigns-by-district-and-date";
+      params = {
+        input_district: selectedDistrict,
+        input_date: selectedDate,
+      };
+    } else if (selectedDistrict) {
+      url = "http://127.0.0.1:8000/blood_bank/get-campaigns-by-district";
+      params = {
+        input_district: selectedDistrict,
+      };
+    } else if (selectedDate) {
+      url = "http://127.0.0.1:8000/blood_bank/get-campaigns-by-date";
+      params = {
+        input_date: selectedDate,
+      };
+    }
+
     try {
-      const response = await axios.get("http://127.0.0.1:8000/blood_bank/get-campaigns-by-district-and-date", {
-        params: {
-          input_district: selectedDistrict,
-          input_date: selectedDate,
-        },
-      });
+      const response = await axios.get(url, { params });
       setCampaigns(response.data);
       setError("");
     } catch (err) {
       console.error("Error fetching campaigns:", err);
       setError("Failed to fetch campaigns.");
+      setCampaigns([]);
     }
   };
 
   return (
-    <div className="min-h-screen min-w-full bg-purple-50 p-8">
+    <div><Navbar />
+    <div className="min-h-screen min-w-full bg-purple-50 p-8 margin-top-16">
+      <div className="flex items-center justify-center h-screen">
       <div className="max-w-4xl mx-auto bg-white shadow-xl rounded-2xl p-6">
-        <h1 className="text-3xl font-bold text-purple-700 mb-6 text-center">Search Blood Donation Campaigns</h1>
-
+        <h1
+          className="text-4xl font-extrabold text-center mb-6"
+          style={{ color: "var(--color-primary)" }}
+        >
+          Search <span className="text-red-500">Blood Donation</span> Campaigns
+        </h1>
+  
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
           <div>
-            <label className="block text-purple-700 font-semibold mb-2">District</label>
+            <label
+              className="block font-semibold mb-2"
+              style={{ color: "var(--color-primary)" }}
+            >
+              District
+            </label>
             <select
               className="w-full border border-purple-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-purple-400"
               value={selectedDistrict}
@@ -64,9 +93,14 @@ const CampaignSearch = () => {
               ))}
             </select>
           </div>
-
+  
           <div>
-            <label className="block text-purple-700 font-semibold mb-2">Date</label>
+            <label
+              className="block font-semibold mb-2"
+              style={{ color: "var(--color-primary)" }}
+            >
+              Date
+            </label>
             <input
               type="date"
               className="w-full border border-purple-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-purple-400"
@@ -75,34 +109,40 @@ const CampaignSearch = () => {
             />
           </div>
         </div>
-
+  
         <button
           onClick={handleSearch}
-          className="w-full bg-purple-400 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200"
+          style={{ backgroundColor: "var(--color-primary)" }}
+          className="w-full hover:opacity-90 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200"
         >
           Search
         </button>
-
+  
         {error && <p className="text-red-500 mt-4">{error}</p>}
-
+  
         <div className="mt-8">
-          {campaigns.map((campaign) => (
-            <div
-              key={campaign.campaign_id}
-              className="bg-purple-500 p-4 rounded-lg shadow-md mb-4 border border-purple-400"
-            >
-              <p><strong>ID:</strong> {campaign.campaign_id}</p>
-              <p><strong>Location:</strong> {campaign.location_address}</p>
-              <p><strong>District:</strong> {campaign.district}</p>
-              <p><strong>Province:</strong> {campaign.province}</p>
-              <p><strong>Date & Time:</strong> {new Date(campaign.date_time).toLocaleString()}</p>
-              <p><strong>Organizer:</strong> {campaign.organizer}</p>
-            </div>
-          ))}
-        </div>
+        {campaigns.map((campaign) => (
+          <div
+            key={campaign.campaign_id}
+            className="bg-blue-100 p-4 rounded-lg shadow-md mb-4 border border-blue-200"
+            style={{ color: "var(--color-primary)" }}
+          >
+            <p><strong>ID:</strong> {campaign.campaign_id}</p>
+            <p><strong>Location:</strong> {campaign.location_address}</p>
+            <p><strong>District:</strong> {campaign.district}</p>
+            <p><strong>Province:</strong> {campaign.province}</p>
+            <p><strong>Date & Time:</strong> {new Date(campaign.date_time).toLocaleString()}</p>
+            <p><strong>Organizer:</strong> {campaign.organizer}</p>
+          </div>
+        ))}
+      </div>
+
       </div>
     </div>
+    </div>
+    </div>
   );
+  
 };
 
 export default CampaignSearch;
