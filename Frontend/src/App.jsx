@@ -24,10 +24,6 @@ import HomagamaScanlist from './homagama/pages/scan_list';
 import HomagamaTestlist from './homagama/pages/test_list';
 import ChatInterface from './components/ChatInterface'
 
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-
-
-
 import ChatInterface from './components/chatbot/ChatInterface';
 import BloodBank from './components/BloodBank/Home/home';
 import Search from './components/BloodBank/Search/Search'
