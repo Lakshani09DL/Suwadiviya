@@ -3,7 +3,7 @@ import Navbar from "../components/navbar/navbar";
 import { useState, useRef } from "react";
 import clinic_image from '../../assets/clinic.jpg';
 
-function Cliniclist(){
+function HomagamaCliniclist(){
 
     const [selectedClinic, setSelectedClinic] = useState(null);
 
@@ -487,4 +487,4 @@ function Cliniclist(){
     );
 }
 
-export default Cliniclist;
+export default HomagamaCliniclist;
