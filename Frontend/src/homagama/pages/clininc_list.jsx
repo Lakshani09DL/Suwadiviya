@@ -395,7 +395,7 @@ function HomagamaCliniclist(){
             }}/>
 
             <motion.h2
-            className="bg-blue-50 text-5xl text-blue-500 font-bold py-20"
+            className="bg-blue-50 text-5xl text-center text-blue-500 font-bold py-20"
             variants={itemVariants}
             initial='hidden'
             animate='visible'
@@ -428,8 +428,8 @@ function HomagamaCliniclist(){
             <div
             className="fixed mt-96 top-0 bottom-0 bg-gray-500 opacity-60 z-0"
             style={{
-                left: '2rem',   
-                right: '2rem',
+                left: '0.5rem',   
+                right: '0.5rem',
             }}
             ></div>
 
