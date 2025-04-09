@@ -1,4 +1,4 @@
-function Testlist(){
+function HomagamaTestlist(){
     return(
         <div>
             Hello this is test page
@@ -6,4 +6,4 @@ function Testlist(){
     );
 }
 
-export default Testlist;
+export default HomagamaTestlist;
