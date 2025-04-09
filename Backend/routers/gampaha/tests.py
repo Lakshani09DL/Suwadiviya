@@ -17,11 +17,22 @@ class ScanServiceResponse(BaseModel):
     special_information: Optional[SpecialInformation] 
 
     class Config:
-        orm_mode = True  # This allows Pydantic to work seamlessly with Beanie's Document
+        from_attributes = True  # This allows Pydantic to work seamlessly with Beanie's Document
+
+
 
 # Endpoint to list all scan services
+
 @router.get("/debug/minimal")
 async def minimal_test():
     # Try fetching WITHOUT any Pydantic response model
     docs = await Tests.find_all().to_list()
     return {"count": len(docs), "first_doc": docs[0] if docs else None}
+
+@router.get("/testlist", response_model=List[ScanServiceResponse])
+async def list_scan_services():
+    scan_services = await Tests.find_all().to_list()  # Get all documents
+    return scan_services
+
+
+
