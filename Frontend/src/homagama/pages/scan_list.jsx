@@ -1,4 +1,4 @@
-function Scanlist(){
+function HomagamaScanlist(){
     return(
         <div>
             Hello this is scan page
@@ -6,4 +6,4 @@ function Scanlist(){
     );
 }
 
-export default Scanlist;
+export default HomagamaScanlist;
