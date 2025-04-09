@@ -44,7 +44,7 @@ function App() {
           <Route path="/gampaha/scans" element={<Scanlist />} />
           <Route path="/gampaha/tests" element={<Testlist />} />
             
-          <Route path="/homagama" element={<GampahaHome />} />
+          <Route path="/homagama" element={<HomagamaHome />} />
           <Route path="/homagama/clinics" element={<HomagamaCliniclist />} />
           <Route path="/homagama/scans" element={<HomagamaScanlist />} />
           <Route path="/homagama/tests" element={<HomagamaTestlist />} />
