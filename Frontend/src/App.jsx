@@ -22,7 +22,6 @@ import HomagamaHome from './homagama/pages/homagama_home';
 import HomagamaCliniclist from './homagama/pages/clininc_list';
 import HomagamaScanlist from './homagama/pages/scan_list';
 import HomagamaTestlist from './homagama/pages/test_list';
-import ChatInterface from './components/ChatInterface'
 
 import ChatInterface from './components/chatbot/ChatInterface';
 import BloodBank from './components/BloodBank/Home/home';
