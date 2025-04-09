@@ -2,9 +2,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, RouterProvider, createBrowserRouter, Outlet, Navigate, BrowserRouter } from 'react-router-dom';
 
-import Home from "./homagama/pages/home";
-
-
 import Login from './components/Login/login';
 import Register from './components/Register/register';
 
