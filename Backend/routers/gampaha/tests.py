@@ -1,9 +1,8 @@
 # routers/scan_service.py
 from fastapi import APIRouter
 from mongo_models.gampaha.gampaha_tests import Tests
-from typing import List, Optional
+from typing import List, Optional, Dict
 from pydantic import BaseModel
-from mongo_models.gampaha.gampaha_tests import SpecialInformation
 
 router = APIRouter()
 
@@ -12,9 +11,9 @@ class ScanServiceResponse(BaseModel):
     name: str
     type: str
     machine_name: str
-    price: float
+    price: int
     location: str
-    special_information: Optional[SpecialInformation] 
+    special_information: Optional[Dict[str,str]] 
 
     class Config:
         from_attributes = True  # This allows Pydantic to work seamlessly with Beanie's Document
