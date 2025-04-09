@@ -13,9 +13,7 @@ function App() {
           <Route path="/register" element={<Register />} />
         </Routes>
       </Router>
-
-    </div>
-    
+    </div> 
   );
 }
 
