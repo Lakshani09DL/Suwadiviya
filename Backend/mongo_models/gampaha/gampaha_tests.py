@@ -2,7 +2,7 @@ from beanie import Document #document is used as the base class for models that 
 from typing import Optional, Dict
 
 
-class Tests(Document):
+class gampahatests(Document):
     name: str
     type: str
     machine_name: Optional[str]

@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException
-from mongo_models.gampaha.gampaha_tests import Tests
+from mongo_models.gampaha.gampaha_tests import gampahatests
 from typing import List, Optional, Dict
 from pydantic import BaseModel
 
@@ -31,19 +31,19 @@ class ScanServiceCreateRequest(BaseModel):
 @router.get("/debug/minimal")
 async def minimal_test():
     # Try fetching WITHOUT any Pydantic response model
-    docs = await Tests.find_all().to_list()
+    docs = await gampahatests.find_all().to_list()
     return {"count": len(docs), "first_doc": docs[0] if docs else None}
 
 @router.get("/testlist", response_model=List[ScanServiceResponse])
 async def list_scan_services():
-    scan_services = await Tests.find_all().to_list()  # Get all documents
+    scan_services = await gampahatests.find_all().to_list()  # Get all documents
     return scan_services
 
 # Endpoint to create a new scan service
 @router.post("/create", response_model=ScanServiceResponse)
 async def create_scan_service(scan_service: ScanServiceCreateRequest):
     scan_service_dict = scan_service.dict()  # Convert to dictionary
-    created_service = Tests(**scan_service_dict)
+    created_service = gampahatests(**scan_service_dict)
     await created_service.insert()  # Insert the document
     print(f"Inserted Document: {created_service}")  # Add this log
     return created_service
