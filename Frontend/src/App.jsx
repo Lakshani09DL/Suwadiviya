@@ -1,5 +1,9 @@
 // App.jsx
 import React from 'react';
+
+import Login from './components/Login/login';
+import Register from './components/Register/register';
+
 import Home from "./gampaha/pages/home";
 import GampahaHome from "./gampaha/pages/gampaha_home";
 import Cliniclist from "./gampaha/pages/clinic_list";
@@ -23,6 +27,11 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
+
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        
+
           <Route path="/" element={<Home />} />
           <Route path="/gampaha" element={<GampahaHome />} />
           <Route path="/gampaha/clinics" element={<Cliniclist />} />
@@ -36,11 +45,12 @@ function App() {
           <Route path="/colombo/clinics" element={<ColomboCliniclist />} />
           <Route path="/colombo/scans" element={<ColomboScanlist />} />
           <Route path="/colombo/tests" element={<ColomboTestlist />} />
-        </Routes>
-      </Router>
-    </div>
+       </Routes>
+     </Router>
+   </div>
   );
 }
 
 export default App;
+
 
