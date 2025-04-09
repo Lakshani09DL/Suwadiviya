@@ -122,3 +122,5 @@ async def get_districts(db: Session = Depends(get_db)):
 
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
+
+
