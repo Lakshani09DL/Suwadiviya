@@ -3,8 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 #from routers import chatbot
 #from routers import blood_bank
 from routers import hospitals
-#from mongodb import init_db
-
+from routers.gampaha import tests
 app = FastAPI()
 
 # 👇 Add CORS middleware before including routers
@@ -21,8 +20,8 @@ app.add_middleware(
 # Include routers
 #app.include_router(chatbot.router, prefix='/chatbot', tags=['Chatbot'])
 #app.include_router(blood_bank.router, prefix='/blood_bank', tags=['Blood Bank'])
-app.include_router(hospitals.router, prefix='/hospitals', tags=['Gampaha tests'])
-
+app.include_router(hospitals.router, prefix='/hospitals', tags=['Hospital'])
+app.include_router(tests.router,prefix='/gampaha',tags=['Gampaha tests'])
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)

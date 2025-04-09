@@ -1,4 +1,10 @@
+import os
 from pymongo import MongoClient
+from dotenv import load_dotenv
+load_dotenv()
 
-client = MongoClient("mongodb+srv://subhagya:0929@marshcluster0.zykjd.mongodb.net/")
+mongo_url = os.getenv("MONGO_URL")
+client = MongoClient(mongo_url)
 db = client["SuwaDiviya"]
+hospital_collection = db["hospital"]
+gampaha_tests=db["gampahatests"]
