@@ -5,11 +5,11 @@ from routers.gampaha import tests
 from routers.gampaha import clinics
 from routers.user import users
 from mongodb import init_db
-from routers import chatbot, blood_bank
+#from routers import chatbot, blood_bank
 
-from apscheduler.schedulers.background import BackgroundScheduler
-from apscheduler.triggers.cron import CronTrigger  # Optional: explicit trigger type
-from tasks.notifications import send_upcoming_campaign_notifications
+#from apscheduler.schedulers.background import BackgroundScheduler
+#from apscheduler.triggers.cron import CronTrigger  # Optional: explicit trigger type
+#from tasks.notifications import send_upcoming_campaign_notifications
 
 
 app = FastAPI()
@@ -29,17 +29,17 @@ async def startup_db_client():
     print("Database connected")
 
 # Include routers
-app.include_router(chatbot.router, prefix='/chatbot', tags=['Chatbot'])
-app.include_router(blood_bank.router, prefix='/blood_bank', tags=['Blood Bank'])
+#app.include_router(chatbot.router, prefix='/chatbot', tags=['Chatbot'])
+#app.include_router(blood_bank.router, prefix='/blood_bank', tags=['Blood Bank'])
 app.include_router(tests.router, prefix='/gampaha/tests', tags=['Gampaha tests'])
 app.include_router(clinics.router, prefix='/gampaha/clinics', tags=['Gampaha clinics'])
 app.include_router(users.router, prefix='/users', tags=['Users'])
 
 # Set up the scheduler
-scheduler = BackgroundScheduler()
+#scheduler = BackgroundScheduler()
 
 # ✅ Add job to run every day at midnight
-scheduler.add_job(
+"""scheduler.add_job(
     send_upcoming_campaign_notifications,
     CronTrigger(hour=0, minute=0),  # For production, runs daily at midnight
     #CronTrigger(minute='*'),  # For testing, runs every minute
@@ -47,12 +47,12 @@ scheduler.add_job(
     replace_existing=True
 )
 
-scheduler.start()
+#scheduler.start()
 
 # Graceful shutdown
 @app.on_event("shutdown")
 def shutdown_event():
-    scheduler.shutdown()
+    scheduler.shutdown()"""
 
 if __name__ == "__main__":
     import uvicorn

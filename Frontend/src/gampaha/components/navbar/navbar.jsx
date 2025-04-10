@@ -3,6 +3,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
+import { Link } from 'react-router-dom';
 
 function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -27,10 +28,21 @@ function Navbar() {
 
             {/* Desktop Navigation */}
             <div className="Right hidden md:flex items-center gap-4 text-black text-sm">
+            <Link to={"/"}>
                 <HomeIcon className="cursor-pointer text-base" />
-                <span className="cursor-pointer hover:text-blue-600">About us</span>
-                <span className="cursor-pointer hover:text-blue-600">Clinics</span>
-                <span className="cursor-pointer hover:text-blue-600">Tests & Scans</span>
+                </Link>
+                <Link to={"/gampaha"}>
+                    <span className="block py-2 cursor-pointer text-black hover:text-blue-600">About us</span>
+                </Link>
+                <Link to={"/gampaha/clinics"}>
+                    <span className="block py-2 cursor-pointer text-black hover:text-blue-600">Clinics</span>
+                </Link>
+                <Link to={"/gampaha/scans"}>
+                    <span className="block py-2 cursor-pointer text-black hover:text-blue-600">Scans</span>
+                </Link>
+                <Link to={"/gampaha/tests"}>
+                    <span className="block py-2 cursor-pointer text-black hover:text-blue-600">Tests</span>
+                </Link>
             </div>
 
             {/* Mobile Hamburger Button */}
