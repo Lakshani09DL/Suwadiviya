@@ -40,6 +40,7 @@ class Notification(Base):
     user_id = Column(Integer, ForeignKey("user.id"))
     campaign_id = Column(Integer, ForeignKey("campaigns.campaign_id"))
     sent_date = Column(DateTime)
+    message = Column(String(255))
     status = Column(Enum('Sent', 'Pending', 'Failed'))
 
     user = relationship("User", back_populates="notifications")

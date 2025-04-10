@@ -25,43 +25,36 @@ def send_upcoming_campaign_notifications():
             print(f"👥 Found {len(users)} users in district {campaign.district}")
 
             for user in users:
-                # Check if a notification already exists for the user and campaign
-                existing = db.query(Notification).filter_by(
-                    user_id=user.id, campaign_id=campaign.campaign_id
-                ).first()
+                # ✅ Always create a new notification — no check
+                notification = Notification(
+                    user_id=user.id,
+                    campaign_id=campaign.campaign_id,
+                    message=f"Blood donation campaign in your area ({campaign.district}) on {campaign.date_time.strftime('%Y-%m-%d %H:%M')}",
+                    status="Pending",
+                    sent_date=None
+                )
+                db.add(notification)
+                print(f"✅ New notification added for user {user.id} for campaign {campaign.campaign_id}")
 
-                if not existing:
-                    # Create a new notification with status "Pending"
-                    notification = Notification(
-                        user_id=user.id,
-                        campaign_id=campaign.campaign_id,
-                        status="Pending"  # Status set to 'Pending' initially
-                    )
-                    db.add(notification)
-                    print(f"✅ Notification added for user {user.id}")
-
-            # Commit the changes to the DB after adding all notifications
+            db.flush()
             db.commit()
             print("🔔 All notifications committed to DB")
 
-        # If notifications have been successfully sent, update the status to 'Sent'
-        for notification in db.query(Notification).filter(Notification.status == 'Pending').all():
-            # Simulate notification being sent
+        # Now send all pending notifications
+        pending_notifications = db.query(Notification).filter(Notification.status == 'Pending').all()
+        for notification in pending_notifications:
             try:
-                # Here you would have the logic to send the notification (e.g., via email/SMS)
-                # For this example, let's assume it's sent successfully
+                # Simulated send
                 notification.status = 'Sent'
-                notification.sent_date = datetime.now()  # Store the sent date/time
+                notification.sent_date = datetime.now()
                 db.commit()
-                print(f"✅ Notification sent to user {notification.user_id} for campaign {notification.campaign_id}")
+                print(f"📨 Notification sent to user {notification.user_id} for campaign {notification.campaign_id}")
             except Exception as e:
-                # In case of error, update the status to 'Failed'
                 notification.status = 'Failed'
                 db.commit()
-                print(f"❌ Failed to send notification to user {notification.user_id} for campaign {notification.campaign_id}: {e}")
+                print(f"❌ Failed to send notification to user {notification.user_id}: {e}")
 
     except Exception as e:
         print(f"❌ Error in notification job: {e}")
-
     finally:
         db.close()
