@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../Navbar/navbar";
+import Navbar from "../components/navbar/navbar";
 
 const TestList = () => {
   const [tests, setTests] = useState([]);

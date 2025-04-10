@@ -33,10 +33,10 @@ import HomagamaCliniclist from "./homagama/pages/clininc_list";
 import HomagamaScanlist from "./homagama/pages/scan_list";
 import HomagamaTestlist from "./homagama/pages/test_list";
 
-import NawalokaHome from "./components/Nawaloka/NawalokaHome/nawalokahome";
-import NawalokaNavbar from "./components/Nawaloka/Navbar/navbar";
-import NawalokaClinics from "./components/Nawaloka/Clinic/clinicCard";
-import NawalokaTestList from "./components/Nawaloka/Test/testlist";
+import NawalokaHome from "./Nawaloka/pages/nawalokahome";
+import NawalokaNavbar from "./Nawaloka/components/navbar/navbar";
+import NawalokaClinics from "./Nawaloka/pages/cliniclist";
+import NawalokaTestList from "./Nawaloka/pages/testlist";
 
 import "./App.css";
 
