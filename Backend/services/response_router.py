@@ -12,4 +12,4 @@ async def route_to_handler(intent: str, query: str):
         return await nearest_hospital.find_nearest(query)
     
     else:
-        return "I'm not sure how to help with that yet."
+        return await emergency.general_chat(query)
