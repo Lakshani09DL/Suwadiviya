@@ -13,4 +13,4 @@ async def chat(request: ChatRequest):
     intent = await detect_intent(request.query)
     response = await route_to_handler(intent, request.query)
     return {"intent": intent, "response": response}
-    #return {"intent":intent}
+    

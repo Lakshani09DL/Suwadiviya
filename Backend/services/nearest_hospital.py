@@ -40,11 +40,11 @@ async def find_nearest(query: str, latitude: float = 6.9271, longitude: float = 
         f" opening_hours: {h['properties'].get('opening_hours', 'No hours available')}"
         for h in hospitals
         )
-        print(hospital_list)
+        
         prompt = (
             f"You are Suwadiviya, a helpful emergency assistant. A user asked: '{query}'. "
             f"Here are the nearby hospitals found via Geoapify:\n\n{hospital_list}\n\n"
-            "Please provide a friendly and concise response for the user including hospital names, addresses and phone numbers if you can find. It's better to give 1-2 hospitals' details."
+            "Please provide a friendly and concise response for the user including hospital names, addresses and websites. It's better to give few hospitals' details. At the end of your response ask the user to verify the details using websites."
         )
 
         try:
