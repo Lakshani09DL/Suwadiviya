@@ -1,9 +1,14 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from routers.homagama import homagama_clinics
+from routers.homagama import homagama_test_scan
+
+
 from routers.gampaha import tests
 from routers.gampaha import clinics
 from routers.user import users
+
 from mongodb import init_db
 from routers import chatbot, blood_bank
 
@@ -31,9 +36,16 @@ async def startup_db_client():
 # Include routers
 app.include_router(chatbot.router, prefix='/chatbot', tags=['Chatbot'])
 app.include_router(blood_bank.router, prefix='/blood_bank', tags=['Blood Bank'])
+
+
+app.include_router(homagama_test_scan.router, prefix='/homagama/tests', tags=['Homagama tests'])
+app.include_router(homagama_test_scan.router, prefix='/homagama/scans', tags=['Homagama scans'])
+app.include_router(homagama_clinics.router, prefix='/homagama/clinics', tags=['Homagama clinics'])
+
 app.include_router(tests.router, prefix='/gampaha/tests', tags=['Gampaha tests'])
 app.include_router(clinics.router, prefix='/gampaha/clinics', tags=['Gampaha clinics'])
 app.include_router(users.router, prefix='/users', tags=['Users'])
+
 
 # Set up the scheduler
 scheduler = BackgroundScheduler()
@@ -56,5 +68,7 @@ def shutdown_event():
 
 if __name__ == "__main__":
     import uvicorn
+
     uvicorn.run(app, host="0.0.0.0", port=8000)
+
 
