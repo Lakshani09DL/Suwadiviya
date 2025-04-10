@@ -1,10 +1,16 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+
+from routers.gampaha import tests
+from routers.gampaha import clinics
+from routers.user import users
+from mongodb import init_db
 from routers import chatbot, blood_bank
 
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.cron import CronTrigger  # Optional: explicit trigger type
 from tasks.notifications import send_upcoming_campaign_notifications
+
 
 app = FastAPI()
 
@@ -17,9 +23,17 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.on_event("startup")
+async def startup_db_client():
+    await init_db()
+    print("Database connected")
+
 # Include routers
 app.include_router(chatbot.router, prefix='/chatbot', tags=['Chatbot'])
 app.include_router(blood_bank.router, prefix='/blood_bank', tags=['Blood Bank'])
+app.include_router(tests.router, prefix='/gampaha/tests', tags=['Gampaha tests'])
+app.include_router(clinics.router, prefix='/gampaha/clinics', tags=['Gampaha clinics'])
+app.include_router(users.router, prefix='/users', tags=['Users'])
 
 # Set up the scheduler
 scheduler = BackgroundScheduler()
@@ -43,3 +57,4 @@ def shutdown_event():
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
+
