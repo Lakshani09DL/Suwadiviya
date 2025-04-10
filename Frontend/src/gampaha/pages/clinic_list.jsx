@@ -5,7 +5,7 @@ import clinic_image from '../../assets/clinic.jpg';
 import { useEffect } from "react";
 
 
-function HomagamaCliniclist(){
+function GampahaCliniclist(){
 
     const [selectedClinic, setSelectedClinic] = useState(null);
     const [clinics, setClinics] = useState([]);
@@ -131,23 +131,28 @@ function HomagamaCliniclist(){
             {selectedClinic && (
                 <div className="fixed inset-0 bg-slate-100 bg-opacity-80 flex justify-center items-center z-50 w-screen h-full" style={{zIndex: 1}}>
                     <div className="bg-white rounded-xl p-6 w-96 shadow-lg relative">
-                        <h3 className="text-2xl bg-blue-200 text-blue-800 font-semibold p-5 mt-20 mb-10">{selectedClinic.clinic_name}</h3>
+                        <h3 className="text-xl bg-blue-200 text-blue-800 font-semibold p-5 mt-12 mb-5">{selectedClinic.clinic_name}</h3>
                         <div className="bg-slate-300 rounded-xl p-6 w-full max-w-full mx-auto">
-                            <p className="text-xl b text-black font-semibold p-5 m-3">
+                            <p className="text-base b text-black font-semibold p-5 m-3">
                                 <strong>Location:</strong> {selectedClinic.location}
                             </p>
-                            <p className="text-xl text-black font-semibold"><strong>Dates:</strong></p>
-                            <ul className="text-xl text-black font-semibold p-1 m-2">
+                            <p className="text-base text-black font-semibold"><strong>Dates:</strong></p>
+                            <ul className="text-base text-black font-semibold p-1 m-2">
                                 {Object.entries(selectedClinic.dates).map(([day, time]) => (
                                     <li key={day}>{day}: {time}</li>
                                 ))}
                             </ul>
-                            <p className="text-xl text-black font-semibold pt-5 mt-2"><strong>Assigned Doctors:</strong></p>
-                            <ul className="text-xl text-black font-semibold p-1 m-2">
+                            <p className="text-base text-black font-semibold pt-5 mt-2"><strong>Assigned Doctors:</strong></p>
+                            <ul className="text-base text-black font-semibold p-1 m-2">
                                 {Object.values(selectedClinic.assigned_doctors).map((doctor, index) => (
                                     <li key={index}>{doctor}</li>
                                 ))}
                             </ul>
+                            {selectedClinic.special_information && selectedClinic.special_information.trim() !== "" && (
+                                <p className="text-base text-black font-semibold p-5 m-3">
+                                    <strong>Special Info:</strong> {selectedClinic.special_information}
+                                </p>
+                            )}
 
                         </div>
                         
@@ -166,4 +171,4 @@ function HomagamaCliniclist(){
     );
 }
 
-export default HomagamaCliniclist;
+export default GampahaCliniclist;
