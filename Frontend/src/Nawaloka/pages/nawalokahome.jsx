@@ -1,10 +1,10 @@
 import { motion, AnimatePresence } from "framer-motion";
-import Navbar from "../Navbar/navbar";
-import Cliniccard from "../Clinic/clinicCard";
-import Testcard from "../Test/testcard";
-import Scancard from "../Scan/scancard";
+import Navbar from "../components/navbar/navbar";
+import Cliniccard from "../components/clinicCard";
+import Testcard from "../components/testcard";
+import Scancard from "../components/scancard";
 import { useEffect, useState } from "react";
-import nawalokaimg from "../../../assets/nawaloka.jpg";
+import nawalokaimg from "../../assets/nawaloka.jpg";
 
 // Animation variants
 const cardVariants = {

@@ -3,6 +3,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import SearchIcon from "@mui/icons-material/Search";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -27,12 +28,29 @@ function Navbar() {
 
       {/* Desktop Navigation */}
       <div className="Right hidden md:flex items-center gap-4 text-black text-sm">
-        <HomeIcon className="cursor-pointer text-base" />
-        <span className="cursor-pointer hover:text-blue-600">About us</span>
-        <span className="cursor-pointer hover:text-blue-600">Clinics</span>
-        <span className="cursor-pointer hover:text-blue-600">
-          Tests & Scans
-        </span>
+        <Link to={"/"}>
+          <HomeIcon className="cursor-pointer text-base" />
+        </Link>
+        <Link to={"/Nawaloka/"}>
+          <span className="block py-2 cursor-pointer text-black hover:text-blue-600">
+            About us
+          </span>
+        </Link>
+        <Link to={"/Nawaloka/clinics"}>
+          <span className="block py-2 cursor-pointer text-black hover:text-blue-600">
+            Clinics
+          </span>
+        </Link>
+        <Link to={"/Nawaloka/scans"}>
+          <span className="block py-2 cursor-pointer text-black hover:text-blue-600">
+            Scans
+          </span>
+        </Link>
+        <Link to={"/Nawaloka/tests"}>
+          <span className="block py-2 cursor-pointer text-black hover:text-blue-600">
+            Tests
+          </span>
+        </Link>
       </div>
 
       {/* Mobile Hamburger Button */}
@@ -64,15 +82,26 @@ function Navbar() {
               <span>Home</span>
             </div>
             <div className="border-t border-gray-200 pt-2">
-              <span className="block py-2 cursor-pointer text-black hover:text-blue-600">
-                About us
-              </span>
-              <span className="block py-2 cursor-pointer text-black hover:text-blue-600">
-                Clinics
-              </span>
-              <span className="block py-2 cursor-pointer text-black hover:text-blue-600">
-                Tests & Scans
-              </span>
+              <Link to={"/Nawaloka/"}>
+                <span className="block py-2 cursor-pointer text-black hover:text-blue-600">
+                  About us
+                </span>
+              </Link>
+              <Link to={"/Nawaloka/clinics"}>
+                <span className="block py-2 cursor-pointer text-black hover:text-blue-600">
+                  Clinics
+                </span>
+              </Link>
+              <Link to={"/Nawaloka/scans"}>
+                <span className="block py-2 cursor-pointer text-black hover:text-blue-600">
+                  Scans
+                </span>
+              </Link>
+              <Link to={"/Nawaloka/tests"}>
+                <span className="block py-2 cursor-pointer text-black hover:text-blue-600">
+                  Tests
+                </span>
+              </Link>
             </div>
           </div>
         </div>
