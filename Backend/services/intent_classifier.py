@@ -3,7 +3,7 @@ from llm.groq_client import query_llama3
 
 
 
-def detect_intent(user_query: str) -> str:
+async def detect_intent(user_query: str) -> str:
     prompt = f"""
 You are an intent classifier for a medical chatbot called Suwadiviya.
 
