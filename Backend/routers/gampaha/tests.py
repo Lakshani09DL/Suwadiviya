@@ -23,6 +23,10 @@ class ScanServiceResponse(BaseModel):
 
 @router.get("/testlist", response_model=List[ScanServiceResponse])
 async def list_scan_services():
-    scan_services = await GampahaTests.find_all().to_list()  # Get all documents
+    scan_services = await GampahaTests.find({"type": "Test"}).to_list(length=None)
     return scan_services
 
+@router.get("/scanlist", response_model=List[ScanServiceResponse])
+async def list_scan_services():
+    scan_services = await GampahaTests.find({"type": "Scan"}).to_list(length=None)
+    return scan_services
