@@ -2,7 +2,7 @@ from beanie import Document #document is used as the base class for models that 
 from typing import Optional, Dict
 
 
-class gampahatests(Document):
+class GampahaTests(Document):
     name: str
     type: str
     machine_name: Optional[str]
@@ -12,4 +12,4 @@ class gampahatests(Document):
 
     
     class Settings:
-        collection = "gampahatests"
+        collection = "GampahaTests"

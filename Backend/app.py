@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 #from routers import chatbot
 #from routers import blood_bank
 from routers.gampaha import tests
+from routers.gampaha import clinics
 from routers.user import users
 from mongodb import init_db
 
@@ -26,6 +27,7 @@ async def startup_db_client():
 #app.include_router(chatbot.router, prefix='/chatbot', tags=['Chatbot'])
 #app.include_router(blood_bank.router, prefix='/blood_bank', tags=['Blood Bank'])
 app.include_router(tests.router, prefix='/gampaha/tests', tags=['Gampaha tests'])
+app.include_router(clinics.router, prefix='/gampaha/clinics', tags=['Gampaha clinics'])
 app.include_router(users.router, prefix='/users', tags=['Users'])
 
 if __name__ == "__main__":
