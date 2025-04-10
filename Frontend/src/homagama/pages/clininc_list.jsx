@@ -1,351 +1,29 @@
 import { motion, useInView } from "framer-motion";
 import Navbar from "../components/navbar/navbar";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import clinic_image from '../../assets/clinic.jpg';
+import axios from 'axios';
 
 function HomagamaCliniclist(){
 
     const [selectedClinic, setSelectedClinic] = useState(null);
 
     // Sample data for clinics, need to replace with backend data
-    const clinics = [
-        {
-            id: 1,
-            clinic_name: "General Clinic",
-            location: "01st Floor",
-            dates : {
-                "Tuesday": "8:00 AM - 12:00 PM",
-                "Thursday": "8:00 AM - 12:00 PM"
-            },
-            special_information: "",
-            assigned_doctors: {
-                0: "Dr. Nimal Perera",
-                1: "Dr. Sanjeewa Ratnayake"
-            }
-        },
-        {
-            id: 2,
-            clinic_name: "Gynecology Clinic",
-            location: "01st Floor",
-            dates : {
-                "Tuesday": "8:00 AM - 12:00 PM",
-                "Friday": "8:00 AM - 12:00 PM"
-            },
-            special_information: "",
-            assigned_doctors: {
-                0: "Dr. Vindya Ekanayake",
-                1: "Dr. Nirosha Fernando"
-            }
-        },
-        {
-            id: 3,
-            clinic_name: "Gynecology Clinic",
-            location: "01st Floor",
-            dates : {
-                "Tuesday": "8:00 AM - 12:00 PM",
-                "Friday": "8:00 AM - 12:00 PM"
-            },
-            special_information: "",
-            assigned_doctors: {
-                0: "Dr. Vindya Ekanayake",
-                1: "Dr. Nirosha Fernando"
-            }
-        },
-        {
-            id: 4,
-            clinic_name: "Gynecology Clinic",
-            location: "01st Floor",
-            dates : {
-                "Tuesday": "8:00 AM - 12:00 PM",
-                "Friday": "8:00 AM - 12:00 PM"
-            },
-            special_information: "",
-            assigned_doctors: {
-                0: "Dr. Vindya Ekanayake",
-                1: "Dr. Nirosha Fernando"
-            }
-        },
-        {
-            id: 5,
-            clinic_name: "Gynecology Clinic",
-            location: "01st Floor",
-            dates : {
-                "Tuesday": "8:00 AM - 12:00 PM",
-                "Friday": "8:00 AM - 12:00 PM"
-            },
-            special_information: "",
-            assigned_doctors: {
-                0: "Dr. Vindya Ekanayake",
-                1: "Dr. Nirosha Fernando"
-            }
-        },
-        {
-            id: 6,
-            clinic_name: "Gynecology Clinic",
-            location: "01st Floor",
-            dates : {
-                "Tuesday": "8:00 AM - 12:00 PM",
-                "Friday": "8:00 AM - 12:00 PM"
-            },
-            special_information: "",
-            assigned_doctors: {
-                0: "Dr. Vindya Ekanayake",
-                1: "Dr. Nirosha Fernando"
-            }
-        },
-        {
-            id: 7,
-            clinic_name: "Pre-Maternity Clinic",
-            location: "01st Floor",
-            dates : {
-                "Tuesday": "8:00 AM - 12:00 PM",
-                "Friday": "8:00 AM - 12:00 PM"
-            },
-            special_information: "",
-            assigned_doctors: {
-                0: "Dr. Vindya Ekanayake",
-                1: "Dr. Nirosha Fernando"
-            }
-        },
-        {
-            id: 8,
-            clinic_name: "Pre-Maternity Clinic",
-            location: "01st Floor",
-            dates : {
-                "Tuesday": "8:00 AM - 12:00 PM",
-                "Friday": "8:00 AM - 12:00 PM"
-            },
-            special_information: "",
-            assigned_doctors: {
-                0: "Dr. Vindya Ekanayake",
-                1: "Dr. Nirosha Fernando"
-            }
-        },
-        {
-            id: 9,
-            clinic_name: "Pre-Maternity Clinic",
-            location: "01st Floor",
-            dates : {
-                "Tuesday": "8:00 AM - 12:00 PM",
-                "Friday": "8:00 AM - 12:00 PM"
-            },
-            special_information: "",
-            assigned_doctors: {
-                0: "Dr. Vindya Ekanayake",
-                1: "Dr. Nirosha Fernando"
-            }
-        },
-        {
-            id: 10,
-            clinic_name: "Pre-Maternity Clinic",
-            location: "01st Floor",
-            dates : {
-                "Tuesday": "8:00 AM - 12:00 PM",
-                "Friday": "8:00 AM - 12:00 PM"
-            },
-            special_information: "",
-            assigned_doctors: {
-                0: "Dr. Vindya Ekanayake",
-                1: "Dr. Nirosha Fernando"
-            }
-        },
-        {
-            id: 11,
-            clinic_name: "Pre-Maternity Clinic",
-            location: "01st Floor",
-            dates : {
-                "Tuesday": "8:00 AM - 12:00 PM",
-                "Friday": "8:00 AM - 12:00 PM"
-            },
-            special_information: "",
-            assigned_doctors: {
-                0: "Dr. Vindya Ekanayake",
-                1: "Dr. Nirosha Fernando"
-            }
-        },
-        {
-            id: 12,
-            clinic_name: "Pre-Maternity Clinic",
-            location: "01st Floor",
-            dates : {
-                "Tuesday": "8:00 AM - 12:00 PM",
-                "Friday": "8:00 AM - 12:00 PM"
-            },
-            special_information: "",
-            assigned_doctors: {
-                0: "Dr. Vindya Ekanayake",
-                1: "Dr. Nirosha Fernando"
-            }
-        },
-        {
-            id: 13,
-            clinic_name: "General Clinic",
-            location: "01st Floor",
-            dates : {
-                "Tuesday": "8:00 AM - 12:00 PM",
-                "Thursday": "8:00 AM - 12:00 PM"
-            },
-            special_information: "",
-            assigned_doctors: {
-                0: "Dr. Nimal Perera",
-                1: "Dr. Sanjeewa Ratnayake"
-            }
-        },
-        {
-            id: 14,
-            clinic_name: "Gynecology Clinic",
-            location: "01st Floor",
-            dates : {
-                "Tuesday": "8:00 AM - 12:00 PM",
-                "Friday": "8:00 AM - 12:00 PM"
-            },
-            special_information: "",
-            assigned_doctors: {
-                0: "Dr. Vindya Ekanayake",
-                1: "Dr. Nirosha Fernando"
-            }
-        },
-        {
-            id: 15,
-            clinic_name: "Gynecology Clinic",
-            location: "01st Floor",
-            dates : {
-                "Tuesday": "8:00 AM - 12:00 PM",
-                "Friday": "8:00 AM - 12:00 PM"
-            },
-            special_information: "",
-            assigned_doctors: {
-                0: "Dr. Vindya Ekanayake",
-                1: "Dr. Nirosha Fernando"
-            }
-        },
-        {
-            id: 16,
-            clinic_name: "Gynecology Clinic",
-            location: "01st Floor",
-            dates : {
-                "Tuesday": "8:00 AM - 12:00 PM",
-                "Friday": "8:00 AM - 12:00 PM"
-            },
-            special_information: "",
-            assigned_doctors: {
-                0: "Dr. Vindya Ekanayake",
-                1: "Dr. Nirosha Fernando"
-            }
-        },
-        {
-            id: 17,
-            clinic_name: "Gynecology Clinic",
-            location: "01st Floor",
-            dates : {
-                "Tuesday": "8:00 AM - 12:00 PM",
-                "Friday": "8:00 AM - 12:00 PM"
-            },
-            special_information: "",
-            assigned_doctors: {
-                0: "Dr. Vindya Ekanayake",
-                1: "Dr. Nirosha Fernando"
-            }
-        },
-        {
-            id: 18,
-            clinic_name: "Gynecology Clinic",
-            location: "01st Floor",
-            dates : {
-                "Tuesday": "8:00 AM - 12:00 PM",
-                "Friday": "8:00 AM - 12:00 PM"
-            },
-            special_information: "",
-            assigned_doctors: {
-                0: "Dr. Vindya Ekanayake",
-                1: "Dr. Nirosha Fernando"
-            }
-        },
-        {
-            id: 19,
-            clinic_name: "Pre-Maternity Clinic",
-            location: "01st Floor",
-            dates : {
-                "Tuesday": "8:00 AM - 12:00 PM",
-                "Friday": "8:00 AM - 12:00 PM"
-            },
-            special_information: "",
-            assigned_doctors: {
-                0: "Dr. Vindya Ekanayake",
-                1: "Dr. Nirosha Fernando"
-            }
-        },
-        {
-            id: 20,
-            clinic_name: "Pre-Maternity Clinic",
-            location: "01st Floor",
-            dates : {
-                "Tuesday": "8:00 AM - 12:00 PM",
-                "Friday": "8:00 AM - 12:00 PM"
-            },
-            special_information: "",
-            assigned_doctors: {
-                0: "Dr. Vindya Ekanayake",
-                1: "Dr. Nirosha Fernando"
-            }
-        },
-        {
-            id: 21,
-            clinic_name: "Pre-Maternity Clinic",
-            location: "01st Floor",
-            dates : {
-                "Tuesday": "8:00 AM - 12:00 PM",
-                "Friday": "8:00 AM - 12:00 PM"
-            },
-            special_information: "",
-            assigned_doctors: {
-                0: "Dr. Vindya Ekanayake",
-                1: "Dr. Nirosha Fernando"
-            }
-        },
-        {
-            id: 22,
-            clinic_name: "Pre-Maternity Clinic",
-            location: "01st Floor",
-            dates : {
-                "Tuesday": "8:00 AM - 12:00 PM",
-                "Friday": "8:00 AM - 12:00 PM"
-            },
-            special_information: "",
-            assigned_doctors: {
-                0: "Dr. Vindya Ekanayake",
-                1: "Dr. Nirosha Fernando"
-            }
-        },
-        {
-            id: 23,
-            clinic_name: "Pre-Maternity Clinic",
-            location: "01st Floor",
-            dates : {
-                "Tuesday": "8:00 AM - 12:00 PM",
-                "Friday": "8:00 AM - 12:00 PM"
-            },
-            special_information: "",
-            assigned_doctors: {
-                0: "Dr. Vindya Ekanayake",
-                1: "Dr. Nirosha Fernando"
-            }
-        },
-        {
-            id: 24,
-            clinic_name: "Pre-Maternity Clinic",
-            location: "01st Floor",
-            dates : {
-                "Tuesday": "8:00 AM - 12:00 PM",
-                "Friday": "8:00 AM - 12:00 PM"
-            },
-            special_information: "",
-            assigned_doctors: {
-                0: "Dr. Vindya Ekanayake",
-                1: "Dr. Nirosha Fernando"
-            }
-        },
-    ];
+    const dummyClinics = [];
+    
+    const [clinics, setClinics] = useState(dummyClinics);
+
+    useEffect(() => {
+        axios.get('http://127.0.0.1:8000/homagama/clinics/homagama-clinic-list')
+        .then(response => {
+            console.log(response.data);
+            setClinics(response.data)
+        })
+        .catch(error => {
+            console.log(error);
+            console.error('Error fetching clinic data:', error);
+        })
+    }, []);
 
     const itemVariants = {
         hidden: { y: 20, opacity: 0 },
@@ -403,7 +81,7 @@ function HomagamaCliniclist(){
                 zIndex: 1,
             }}
             >
-                Clinics Available at Homagama Base Hospital
+                Welcome to Clinical Services at Homagama Base Hospital!
             </motion.h2>
 
             <motion.div 
