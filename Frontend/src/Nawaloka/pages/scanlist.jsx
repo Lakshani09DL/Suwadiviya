@@ -1,22 +1,171 @@
-import { Link } from "react-router-dom";
+import { motion, useInView } from "framer-motion";
+import Navbar from "../components/navbar/navbar";
+import { useState, useRef, useEffect } from "react";
+import scan_image from "../../assets/scan.jpg";
+import axios from "axios";
 
-function ClinicList() {
+function NawalokaScanlist() {
+  const [selectedScan, setSelectedScan] = useState(null);
+
+  // Sample data for scans, need to replace with backend data
+  const dummyScans = [];
+
+  const [scans, setScans] = useState(dummyScans);
+
+  useEffect(() => {
+    axios
+      .get("http://127.0.0.1:8000/homagama/scans/homagama-scan-list") //change this to the correct endpoint for Nawaloka
+      .then((response) => {
+        setScans(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching scan data:", error);
+      });
+  }, []);
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+      },
+    },
+  };
+
+  // Component to display each scan
+  const Scan = ({ scan, setSelectedScan, selectedScan, itemVariants }) => {
+    const ref = useRef(null);
+    const isInView = useInView(ref, { once: true });
+
+    return (
+      <motion.div
+        ref={ref}
+        className="bg-slate-50 shadow-lg rounded-xl px-10 py-6 w-full max-w-full mx-auto"
+        variants={itemVariants}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+        style={{
+          zIndex: 1,
+        }}
+      >
+        <h3 className="text-xl text-blue-700 font-semibold">{scan.name}</h3>
+        <button
+          className="text-white bg-blue-700 sm p-2 m-6"
+          onClick={() => setSelectedScan(scan)}
+        >
+          View More
+        </button>
+      </motion.div>
+    );
+  };
+
   return (
-    <div className="Clinicdescription">
-      <h1>Clinic List</h1>
-      <ul>
-        <li>
-          <Link to="/clinic/1">Clinic 1</Link>
-        </li>
-        <li>
-          <Link to="/clinic/2">Clinic 2</Link>
-        </li>
-        <li>
-          <Link to="/clinic/3">Clinic 3</Link>
-        </li>
-      </ul>
-    </div>
+    <>
+      <Navbar
+        style={{
+          zIndex: 1,
+        }}
+      />
+
+      <motion.h2
+        className="bg-blue-50 text-5xl text-center text-blue-500 font-bold py-20"
+        variants={itemVariants}
+        initial="hidden"
+        animate="visible"
+        style={{
+          zIndex: 1,
+        }}
+      >
+        Welcome to Nawaloka Scan Services!
+      </motion.h2>
+
+      <motion.div
+        className="bg-blue-50 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-20 gap-y-20 px-40 py-20"
+        initial="hidden"
+        animate="visible"
+        style={{
+          backgroundImage: `url(${scan_image})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+        variants={{
+          hidden: {},
+          visible: {
+            transition: {
+              staggerChildren: 0.2,
+            },
+          },
+        }}
+      >
+        <div
+          className="fixed mt-96 top-0 bottom-20 bg-gray-500 opacity-60 z-0"
+          style={{
+            left: "0.5rem",
+            right: "0.5rem",
+          }}
+        ></div>
+
+        {scans.map((scan) => (
+          <Scan
+            key={scan.id}
+            scan={scan}
+            setSelectedScan={setSelectedScan}
+            selectedScan={selectedScan}
+            itemVariants={{
+              hidden: { opacity: 0, y: 30 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+            }}
+          />
+        ))}
+
+        {selectedScan && (
+          <div
+            className="fixed inset-0 bg-slate-100 bg-opacity-80 flex justify-center items-center z-50 w-screen h-full"
+            style={{ zIndex: 1 }}
+          >
+            <div className="bg-white rounded-xl p-6 w-auto shadow-lg relative max-h-[80vh] overflow-y-auto">
+              <h3 className="text-2xl bg-blue-200 text-blue-800 font-semibold p-5 mt-20 mb-10">
+                {selectedScan.name}
+              </h3>
+              <div className="bg-slate-300 rounded-xl p-6 w-full max-w-full mx-auto">
+                <p className="text-xl text-black font-semibold p-2 m-3">
+                  <strong>Location:</strong> {selectedScan.location}
+                </p>
+                <p className="text-xl text-black font-semibold p-2 m-3">
+                  <strong>Machine: </strong>
+                  {selectedScan.machine_name}
+                </p>
+                {/* <p className="text-xl text-black font-semibold p-2 m-3">
+                            <strong>Price: </strong>{selectedScan.price}
+                        </p> */}
+                <p className="text-xl text-black font-semibold p-2 m-3">
+                  <strong>Special Information: </strong>
+                </p>
+                <ul className="text-xl text-gray-800 font-semibold p-2 m-2">
+                  {Object.entries(selectedScan.special_information).map(
+                    ([key, value], index) => (
+                      <li key={index}>
+                        <strong>{key}</strong>: {value}
+                      </li>
+                    )
+                  )}
+                </ul>
+              </div>
+              <button
+                onClick={() => setSelectedScan(null)}
+                className="absolute top-2 right-3 bg-red-500 text-white hover:text-red-600 text-xl"
+              >
+                &times;
+              </button>
+            </div>
+          </div>
+        )}
+      </motion.div>
+    </>
   );
 }
 
-export default ClinicList;
+export default NawalokaScanlist;
