@@ -1,13 +1,30 @@
 import { motion, useInView } from "framer-motion";
 import Navbar from "../components/navbar/navbar";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import test_image from "../../assets/tests.jpg";
+import axios from "axios";
 
 function NawalokaTest() {
   const [selectedTest, setSelectedTest] = useState(null);
 
   // Sample data for tests, need to replace with backend data
   const [searchTerm, setSearchTerm] = useState("");
+  const dummyTest = [];
+
+  const [tests, setTest] = useState(dummyTest);
+
+  useEffect(() => {
+    axios
+      .get("/api/tests") // Replace with the correct API endpoint
+      .then((response) => {
+        console.log(response.data);
+        setTest(Array.isArray(response.data) ? response.data : []);
+      })
+      .catch((error) => {
+        console.log(error);
+        console.error("Error fetching test data:", error);
+      });
+  }, []);
 
   const test = [
     {
@@ -245,7 +262,7 @@ function NawalokaTest() {
           zIndex: 1,
         }}
       >
-        Welcome to Nawaloka Test Service
+        Welcome to Nawaloka Test Service!
       </motion.h2>
 
       <motion.div

@@ -14,7 +14,7 @@ function NawalokaScanlist() {
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8000/homagama/scans/homagama-scan-list") //change this to the correct endpoint for Nawaloka
+      .get("http://127.0.0.1:8000/nawaloka/scans/nawaloka-scan-list") //change this to the correct endpoint for Nawaloka
       .then((response) => {
         setScans(response.data);
       })
