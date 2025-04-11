@@ -1,9 +1,5 @@
 "use client"
 
-import React from "react";
-import { motion } from "framer-motion";
-import { FaUserMd, FaStethoscope, FaMoneyBillWave } from "react-icons/fa";
-import hospitalimg from '../../assets/imgg.jpg';
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { FaRobot } from "react-icons/fa";
