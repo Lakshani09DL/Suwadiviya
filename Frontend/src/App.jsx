@@ -40,11 +40,13 @@ import NawalokaClinics from "./Nawaloka/pages/cliniclist";
 import NawalokaTestList from "./Nawaloka/pages/testlist";
 
 import "./App.css";
+import ScrollToTop from "./components/ScrollToTop/scrolltotop";
 
 function App() {
   return (
     <div className="App">
       <Router>
+        <ScrollToTop/>
         <Routes>
           {/* Authentication Routes */}
           <Route path="/login" element={<Login />} />
