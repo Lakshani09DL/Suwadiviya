@@ -1,9 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routers import chatbot, blood_bank
-
+from tasks.notifications import router as notifications_router  # Import the router
 from apscheduler.schedulers.background import BackgroundScheduler
-from apscheduler.triggers.cron import CronTrigger  # Optional: explicit trigger type
+from apscheduler.triggers.cron import CronTrigger
 from tasks.notifications import send_upcoming_campaign_notifications
 
 app = FastAPI()
@@ -20,6 +20,7 @@ app.add_middleware(
 # Include routers
 app.include_router(chatbot.router, prefix='/chatbot', tags=['Chatbot'])
 app.include_router(blood_bank.router, prefix='/blood_bank', tags=['Blood Bank'])
+app.include_router(notifications_router, prefix="/notifications", tags=["Notifications"])
 
 # Set up the scheduler
 scheduler = BackgroundScheduler()
@@ -27,8 +28,7 @@ scheduler = BackgroundScheduler()
 # ✅ Add job to run every day at midnight
 scheduler.add_job(
     send_upcoming_campaign_notifications,
-    CronTrigger(hour=0, minute=0),  # For production, runs daily at midnight
-    #CronTrigger(minute='*'),  # For testing, runs every minute
+    CronTrigger(hour=0, minute=0),
     id="campaign_notification_job",
     replace_existing=True
 )
