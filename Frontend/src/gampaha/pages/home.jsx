@@ -1,7 +1,18 @@
+"use client"
+
 import React from "react";
 import { motion } from "framer-motion";
 import { FaUserMd, FaStethoscope, FaMoneyBillWave } from "react-icons/fa";
 import hospitalimg from '../../assets/imgg.jpg';
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { FaRobot } from "react-icons/fa";
+import { FaComments, FaBrain } from "react-icons/fa";
+import { BsChatDotsFill, BsFillChatQuoteFill, BsRobot } from "react-icons/bs";
+import { HiChatAlt2, HiOutlineChip } from "react-icons/hi";
+
+
+
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 50 },
@@ -9,6 +20,35 @@ const fadeInUp = {
 };
 
 function Home() {
+  const navigate = useNavigate(); 
+
+  const handleChatbotClick = () => {
+    navigate("/chat");
+  };
+
+  const services = [
+    {
+      title: "Ask Question from chatbot",
+      desc: "Interact with our AI-powered chatbot to get instant answers to your health-related queries",
+      btn: "Click here",
+      route: "/chat", 
+    },
+    {
+      title: "Bloodbank",
+      desc: "Explore information about blood donation centers, upcoming blood donation campaigns, and how you can contribute to saving lives by donating blood at our designated locations",
+      btn: "Visit page",
+      route: "/bloodBank",
+    },
+    {
+      title: "Get infomation of Clinics, Tests and Scans",
+      desc: "Discover the variety of clinics, medical tests, and diagnostic scans hospitals offer, with detailed information",
+      anchor: "search-hospitals",
+      btn: "Scroll Down for Visit Hospitals",
+      type: "anchor",
+    },
+  ];
+
+
   return (
     <div className="bg-white text-gray-900 font-sans">
 
@@ -49,8 +89,11 @@ function Home() {
           <p className="text-lg text-gray-600 max-w-xl mx-auto md:mx-0">
             Your health and well-being are our top priority — always.
           </p>
-          <button className="bg-blue-600 text-white px-6 py-3 rounded-full font-semibold shadow hover:bg-blue-700 transition">
-            Ask Chatbot 
+          <button
+            onClick={handleChatbotClick}
+            className="bg-blue-600 text-white px-6 py-3 rounded-full font-semibold shadow hover:bg-blue-700 transition"
+          >
+            Ask Chatbot
           </button>
         </div>
 
@@ -77,26 +120,27 @@ function Home() {
           Our Services
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
-          {[ 
-            { title: "Ask Question from chatbot", desc: "Interact with our AI-powered chatbot to get instant answers to your health-related queries", btn: "Click here" },
-            { title: "Bloodbank", desc: "Explore information about blood donation centers, upcoming blood donation campaigns, and how you can contribute to saving lives by donating blood at our designated locations", btn: "Visit page" },
-            { title: "Get infomation of Clinics, Tests and Scans", desc: "Discover the variety of clinics, medical tests, and diagnostic scans hospitals offer, with detailed information ", btn: "Visit page" }
-          ].map((item, idx) => (
+          {services.map((item, idx) => (
             <div
               key={idx}
               className="bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl hover:scale-[1.02] transition duration-300 text-center"
             >
-              <h3 className="text-2xl font-semibold text-blue-700 mb-4">{item.title}</h3>
+              <h3 className="text-2xl font-semibold text-blue-700 mb-4">
+                {item.title}
+              </h3>
               <p className="text-gray-600 mb-6">{item.desc}</p>
-              <button className="bg-blue-600 text-white px-5 py-2 rounded-full font-medium hover:bg-blue-700 transition">
+              <button
+                className="bg-blue-600 text-white px-5 py-2 rounded-full font-medium hover:bg-blue-700 transition"
+                onClick={() => navigate(item.route)} 
+              >
                 {item.btn}
               </button>
             </div>
           ))}
         </div>
       </motion.section>
-
-      {/* Why Choose Us Section */}
+        
+      
       <motion.section
         id="search-hospitals"
         className="min-h-screen bg-white text-blue-900 flex flex-col justify-center px-6 md:px-16 py-20 pt-20"
@@ -107,21 +151,43 @@ function Home() {
       >
         <h2 className="text-4xl font-bold text-center mb-16">Search Hospitals</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
-          {[ 
-            { icon: <FaUserMd className="text-4xl mb-4 text-blue-700" />, title: "Colombo National Hospital", desc: "Discover the variety of clinics, medical tests, and diagnostic scans hospitals offer, with detailed information " },
-            { icon: <FaUserMd className="text-4xl mb-4 text-blue-700" />, title: "Homagama Base Hospital", desc: "Discover the variety of clinics, medical tests, and diagnostic scans hospitals offer, with detailed information" },
-            { icon: <FaUserMd className="text-4xl mb-4 text-blue-700" />, title: "Gampaha District Hospital", desc: "Discover the variety of clinics, medical tests, and diagnostic scans hospitals offer, with detailed information" },
-            { icon: <FaUserMd className="text-4xl mb-4 text-blue-700" />, title: "Nawaloka Hospital", desc: "Discover the variety of clinics, medical tests, and diagnostic scans hospitals offer, with detailed information" }
-
+          {[
+            {
+              icon: <FaUserMd className="text-4xl mb-4 text-blue-700" />,
+              title: "Colombo National Hospital",
+              desc:
+                "Discover the variety of clinics, medical tests, and diagnostic scans hospitals offer, with detailed information",
+              route: "/colombo",
+            },
+            {
+              icon: <FaUserMd className="text-4xl mb-4 text-blue-700" />,
+              title: "Homagama Base Hospital",
+              desc:
+                "Discover the variety of clinics, medical tests, and diagnostic scans hospitals offer, with detailed information",
+              route: "/homagama",
+            },
+            {
+              icon: <FaUserMd className="text-4xl mb-4 text-blue-700" />,
+              title: "Gampaha District Hospital",
+              desc:
+                "Discover the variety of clinics, medical tests, and diagnostic scans hospitals offer, with detailed information",
+              route: "/gampaha",
+            },
+            {
+              icon: <FaUserMd className="text-4xl mb-4 text-blue-700" />,
+              title: "Nawaloka Hospital",
+              desc:
+                "Discover the variety of clinics, medical tests, and diagnostic scans hospitals offer, with detailed information",
+              route: "/nawaloka",
+            },
           ].map((feature, idx) => (
-            <div
-              key={idx}
-              className="bg-blue-100 rounded-2xl p-8 shadow hover:shadow-lg transition"
-            >
-              {feature.icon}
-              <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
-              <p className="text-gray-700">{feature.desc}</p>
-            </div>
+            <Link to={feature.route} key={idx}>
+              <div className="bg-blue-100 rounded-2xl p-8 shadow hover:shadow-lg transition hover:scale-[1.02] cursor-pointer">
+                {feature.icon}
+                <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
+                <p className="text-gray-700">{feature.desc}</p>
+              </div>
+            </Link>
           ))}
         </div>
       </motion.section>
@@ -140,6 +206,16 @@ function Home() {
           <a href="#" className="hover:underline text-sm">Terms of Use</a>
         </div>
       </motion.footer>
+
+      {/* Floating Chatbot Button */}
+      <button
+        onClick={handleChatbotClick}
+        className="fixed bottom-6 right-6 z-50 bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition duration-300 flex items-center justify-center animate-bounce"
+        title="Chat with SuwaBot"
+      >
+        <HiChatAlt2 className="text-4xl" />
+      </button>    
+
     </div>
   );
 }
