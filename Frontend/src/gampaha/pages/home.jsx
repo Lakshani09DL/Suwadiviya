@@ -7,11 +7,6 @@ import hospitalimg from '../../assets/imgg.jpg';
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { FaRobot } from "react-icons/fa";
-import { FaComments, FaBrain } from "react-icons/fa";
-import { BsChatDotsFill, BsFillChatQuoteFill, BsRobot } from "react-icons/bs";
-import { HiChatAlt2, HiOutlineChip } from "react-icons/hi";
-
-
 
 
 const fadeInUp = {
@@ -213,7 +208,7 @@ function Home() {
         className="fixed bottom-6 right-6 z-50 bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition duration-300 flex items-center justify-center animate-bounce"
         title="Chat with SuwaBot"
       >
-        <HiChatAlt2 className="text-4xl" />
+        <FaRobot className="text-4xl" />
       </button>    
 
     </div>
