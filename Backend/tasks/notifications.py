@@ -2,6 +2,45 @@ from datetime import datetime, timedelta
 from sqlalchemy.orm import Session
 from models import Campaign, User, Notification
 from database import SessionLocal
+from fastapi import APIRouter, Depends,HTTPException
+from database import get_db
+from typing import List, Optional
+from pydantic import BaseModel
+from sqlalchemy import text
+
+router = APIRouter()
+
+class NotificationOut(BaseModel):
+    notification_id: int
+    campaign_id: int
+    message: Optional[str]
+    status: str
+    sent_date: Optional[str]
+
+@router.get("/notifications/{user_id}", response_model=List[NotificationOut])
+def get_user_notifications(user_id: int, db: Session = Depends(get_db)):
+    try:
+        result = db.execute(
+            text("CALL get_user_notifications(:user_id)"),
+            {"user_id": user_id}
+        ).fetchall()
+
+        notifications = [
+            {
+                "notification_id": row[0],
+                "campaign_id": row[1],
+                "message": row[2],
+                "status": row[3],
+                "sent_date": row[4].isoformat() if row[4] else None,
+            }
+            for row in result
+        ]
+
+        return notifications
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error calling procedure: {str(e)}")    
+
 
 def send_upcoming_campaign_notifications():
     db = SessionLocal()

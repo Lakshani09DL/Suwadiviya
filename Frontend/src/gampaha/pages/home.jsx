@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useNavigate } from "react-router-dom";
@@ -6,9 +7,6 @@ import { FaRobot } from "react-icons/fa";
 import { FaComments, FaBrain } from "react-icons/fa";
 import { BsChatDotsFill, BsFillChatQuoteFill, BsRobot } from "react-icons/bs";
 import { HiChatAlt2, HiOutlineChip } from "react-icons/hi";
-
-
-
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 50 },
@@ -43,7 +41,6 @@ function Home() {
       type: "anchor",
     },
   ];
-
 
   return (
     <div className="bg-white text-gray-900 font-sans">
@@ -85,11 +82,13 @@ function Home() {
           <p className="text-lg text-gray-600 max-w-xl mx-auto md:mx-0">
             Your health and well-being are our top priority — always.
           </p>
+          
           <button
             onClick={handleChatbotClick}
             className="bg-blue-600 text-white px-6 py-3 rounded-full font-semibold shadow hover:bg-blue-700 transition"
           >
             Ask Chatbot
+
           </button>
         </div>
 
@@ -116,11 +115,15 @@ function Home() {
           Our Services
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+
           {services.map((item, idx) => (
+
+         
             <div
               key={idx}
               className="bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl hover:scale-[1.02] transition duration-300 text-center"
             >
+
               <h3 className="text-2xl font-semibold text-blue-700 mb-4">
                 {item.title}
               </h3>
@@ -129,10 +132,12 @@ function Home() {
                 className="bg-blue-600 text-white px-5 py-2 rounded-full font-medium hover:bg-blue-700 transition"
                 onClick={() => navigate(item.route)} 
               >
+
                 {item.btn}
               </button>
             </div>
           ))}
+
         </div>
       </motion.section>
         
@@ -211,6 +216,7 @@ function Home() {
       >
         <HiChatAlt2 className="text-4xl" />
       </button>    
+
 
     </div>
   );
