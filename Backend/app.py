@@ -9,6 +9,9 @@ from routers.gampaha import tests
 from routers.gampaha import clinics
 from routers.user import users
 
+from routers.nawaloka import nawaloka_clinics
+from routers.nawaloka import nawaloka_testnscan
+
 from mongodb import init_db
 
 
@@ -52,6 +55,10 @@ app.include_router(homagama_clinics.router, prefix='/homagama/clinics', tags=['H
 
 app.include_router(tests.router, prefix='/gampaha/tests', tags=['Gampaha tests'])
 app.include_router(clinics.router, prefix='/gampaha/clinics', tags=['Gampaha clinics'])
+
+app.include_router(nawaloka_testnscan.router, prefix='/nawaloka/tests', tags=['Nawaloka tests'])
+app.include_router(nawaloka_testnscan.router, prefix='/nawaloka/scans', tags=['Nawaloka scans'])
+app.include_router(nawaloka_clinics.router, prefix='/nawaloka/clinics', tags=['Nawaloka clinics'])
 
 app.include_router(users.router, prefix='/users', tags=['Users'])
 

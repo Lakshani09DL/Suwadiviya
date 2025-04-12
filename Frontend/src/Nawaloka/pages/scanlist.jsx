@@ -6,6 +6,7 @@ import axios from "axios";
 
 function NawalokaScanlist() {
   const [selectedScan, setSelectedScan] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
 
   // Sample data for scans, need to replace with backend data
   const dummyScans = [];
@@ -22,6 +23,10 @@ function NawalokaScanlist() {
         console.error("Error fetching scan data:", error);
       });
   }, []);
+  const displayScans = scans.length > 0 ? scans : dummyScans;
+  const filteredScans = displayScans.filter((scan) =>
+    scan.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
@@ -62,6 +67,10 @@ function NawalokaScanlist() {
     );
   };
 
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
   return (
     <>
       <Navbar
@@ -81,6 +90,16 @@ function NawalokaScanlist() {
       >
         Welcome to Nawaloka Scan Services!
       </motion.h2>
+
+      <div className="flex justify-center mb-10">
+        <input
+          type="text"
+          placeholder="Search by scan name..."
+          className="border border-gray-300 rounded-lg px-4 py-2 w-1/2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          value={searchTerm}
+          onChange={handleSearchChange} // Filter as you type
+        />
+      </div>
 
       <motion.div
         className="bg-blue-50 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-20 gap-y-20 px-40 py-20"
@@ -108,18 +127,25 @@ function NawalokaScanlist() {
           }}
         ></div>
 
-        {scans.map((scan) => (
-          <Scan
-            key={scan.id}
-            scan={scan}
-            setSelectedScan={setSelectedScan}
-            selectedScan={selectedScan}
-            itemVariants={{
-              hidden: { opacity: 0, y: 30 },
-              visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-            }}
-          />
-        ))}
+        {filteredScans.length > 0 ? (
+          filteredScans.map((scan) => (
+            <Scan
+              key={scan.id}
+              scan={scan}
+              setSelectedScan={setSelectedScan}
+              selectedScan={selectedScan}
+              itemVariants={{
+                hidden: { opacity: 0, y: 30 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+              }}
+            />
+          ))
+        ) : (
+          <div className="col-span-full text-center text-xl text-white bg-blue-700 p-4 rounded-lg">
+            No scans found matching "{searchTerm}". Please try a different
+            search term.
+          </div>
+        )}
 
         {selectedScan && (
           <div

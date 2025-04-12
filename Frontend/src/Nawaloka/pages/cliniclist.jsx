@@ -6,6 +6,7 @@ import axios from "axios";
 
 function NawalokaClinics() {
   const [selectedClinic, setSelectedClinic] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
   const dummyClinics = [];
 
   const [clinics, setClinics] = useState(dummyClinics);
@@ -22,6 +23,11 @@ function NawalokaClinics() {
         console.error("Error fetching clinic data:", error);
       });
   }, []);
+
+  const displayClinics = clinics.length > 0 ? clinics : dummyClinics;
+  const filteredClinics = displayClinics.filter((clinic) =>
+    clinic.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
     visible: {
@@ -65,6 +71,10 @@ function NawalokaClinics() {
     );
   };
 
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
   return (
     <>
       <Navbar
@@ -83,6 +93,16 @@ function NawalokaClinics() {
       >
         Welcome to Nawaloka Clinical Services!
       </motion.h2>
+
+      <div className="flex justify-center mb-10">
+        <input
+          type="text"
+          placeholder="Search by clinic name..."
+          className="border border-gray-300 rounded-lg px-4 py-2 w-1/2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          value={searchTerm}
+          onChange={handleSearchChange} // Filter as you type
+        />
+      </div>
 
       <motion.div
         className="bg-blue-50 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-20 gap-y-20 px-40 py-20"
@@ -110,18 +130,25 @@ function NawalokaClinics() {
           }}
         ></div>
 
-        {clinics.map((clinic) => (
-          <Clinic
-            key={clinic.id}
-            clinic={clinic}
-            setSelectedClinic={setSelectedClinic}
-            selectedClinic={selectedClinic}
-            itemVariants={{
-              hidden: { opacity: 0, y: 30 },
-              visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-            }}
-          />
-        ))}
+        {filteredClinics.length > 0 ? (
+          filteredClinics.map((clinic) => (
+            <Clinic
+              key={clinic.id}
+              clinic={clinic}
+              setSelectedClinic={setSelectedClinic}
+              selectedClinic={selectedClinic}
+              itemVariants={{
+                hidden: { opacity: 0, y: 30 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+              }}
+            />
+          ))
+        ) : (
+          <div className="col-span-full text-center text-xl text-white bg-blue-700 p-4 rounded-lg">
+            No clinics found matching "{searchTerm}". Please try a different
+            search term.
+          </div>
+        )}
 
         {selectedClinic && (
           <div
