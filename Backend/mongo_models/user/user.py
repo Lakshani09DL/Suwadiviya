@@ -14,6 +14,7 @@ class User(Document):
     district: str
     province: str
     dob: datetime
+    password: str
 
     
     class Settings:
