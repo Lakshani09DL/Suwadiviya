@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
 import bgimage from '../../assets/hos.jpg'
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -31,26 +34,41 @@ const Register = () => {
     e.preventDefault()
     setErrorMessage('')
     setSuccessMessage('')
-
+  
     if (formData.password !== formData.confirmPassword) {
       setErrorMessage('Passwords do not match')
       return
     }
-
-    // Prepare data for API (excluding confirmPassword)
-    const { confirmPassword, ...userData } = formData
-
+  
+    // Convert dateOfBirth into a datetime string (YYYY-MM-DD)
+    const formattedDateOfBirth = new Date(formData.dateOfBirth).toISOString().split('T')[0]
+  
+    // Map frontend field names to backend expected field names
+    const requestBody = {
+      name: formData.name,
+      email_address: formData.email,
+      contact_number: formData.contactNo1,
+      verification_contact_number: formData.contactNo2 || formData.contactNo1, // fallback to primary if secondary not provided
+      gender: formData.gender,
+      blood_type: formData.bloodType,
+      address: formData.address,
+      district: formData.district,
+      province: formData.province,
+      dob: formattedDateOfBirth,
+      password: formData.password
+    }
+  
     try {
-      const response = await fetch('http://localhost:8000/register', {
+      const response = await fetch('http://localhost:8000/users/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(userData),
+        body: JSON.stringify(requestBody),
       })
-
+  
       const data = await response.json()
-
+  
       if (response.ok) {
         setSuccessMessage('Registration successful! You can now login.')
         // Reset form
@@ -67,7 +85,13 @@ const Register = () => {
           district: '',
           province: '',
           dateOfBirth: ''
-        })
+        });
+         // Navigate to login after 1 seconds
+        setTimeout(() => {
+          navigate('/login');
+        }, 1000);
+
+
       } else {
         setErrorMessage(data.detail || 'Registration failed')
       }
