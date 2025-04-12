@@ -9,29 +9,40 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState('')
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setErrorMessage('')
+    e.preventDefault();
+    setErrorMessage('');
 
     try {
-      const response = await fetch('http://localhost:8000/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      })
+        const response = await fetch('http://localhost:8000/users/login', {  // Updated endpoint to match your backend
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ 
+                email_address: email,  
+                password: password 
+            }),
+        });
 
-      const data = await response.json()
+        const data = await response.json();
 
-      if (response.ok) {
-        alert('Login successful!')
-      } else {
-        setErrorMessage(data.detail || 'Invalid credentials')
-      }
+        if (response.ok) {
+            // Store the token and user info in localStorage
+            localStorage.setItem('access_token', data.access_token);
+            localStorage.setItem('user', JSON.stringify(data.user));
+            
+            // Redirect to dashboard/home page
+            window.location.href = '/'; 
+            
+            // Optional: Show success message before redirect
+            //setSuccessMessage('Login successful! Redirecting...');
+        } else {
+            setErrorMessage(data.detail || 'Invalid email or password');
+        }
     } catch (error) {
-      setErrorMessage('Backend connection failed')
+        setErrorMessage('Failed to connect to server. Please try again later.');
     }
-  }
+};
 
   return (
     <div
@@ -102,7 +113,7 @@ const Login = () => {
               </button>
 
               <p className="text-center text-sm text-gray-600">
-                Don’t have an account? <a href="/signup" className="text-blue-600 hover:underline">Sign up</a>
+                Don’t have an account? <a href="/register" className="text-blue-600 hover:underline">Sign up</a>
               </p>
             </form>
           </div>

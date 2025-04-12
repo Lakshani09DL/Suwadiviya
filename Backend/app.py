@@ -52,6 +52,7 @@ app.include_router(homagama_clinics.router, prefix='/homagama/clinics', tags=['H
 
 app.include_router(tests.router, prefix='/gampaha/tests', tags=['Gampaha tests'])
 app.include_router(clinics.router, prefix='/gampaha/clinics', tags=['Gampaha clinics'])
+
 app.include_router(users.router, prefix='/users', tags=['Users'])
 
 
