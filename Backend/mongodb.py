@@ -14,7 +14,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-MONGO_URL = os.getenv("MONGO_URL")  # Your Atlas connection string
+MONGO_URL = os.getenv("MONGO_URL")  
 
 async def init_db():
     client = AsyncIOMotorClient(MONGO_URL)

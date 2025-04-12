@@ -40,7 +40,7 @@ const Navbar = () => {
           <div className="hidden lg:flex space-x-6">
             <Link to="/bloodBank" className="text-gray-700 dark:text-gray-400 hover:text-primary transition duration-300">Home</Link>
             <Link to="/search" className="text-gray-700 dark:text-gray-400 hover:text-primary transition duration-300">Search</Link>
-            <Link to="/contact" className="text-gray-700 dark:text-gray-400 hover:text-primary transition duration-300">Contact</Link>
+            
             <NotificationBell userId={6} />
 
           </div>

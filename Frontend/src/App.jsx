@@ -11,7 +11,7 @@ import Search from "./components/BloodBank/Search/Search";
 
 import Home from "./gampaha/pages/home";
 import GampahaHome from "./gampaha/pages/gampaha_home";
-import Cliniclist from "./gampaha/pages/clinic_list";
+import GampahaCliniclist from "./gampaha/pages/clinic_list";
 import Scanlist from "./gampaha/pages/scan_list";
 import Testlist from "./gampaha/pages/test_list";
 
@@ -51,7 +51,7 @@ function App() {
 
           {/* Gampaha Routes */}
           <Route path="/gampaha" element={<GampahaHome />} />
-          <Route path="/gampaha/clinics" element={<Cliniclist />} />
+          <Route path="/gampaha/clinics" element={<GampahaCliniclist/>} />
           <Route path="/gampaha/scans" element={<Scanlist />} />
           <Route path="/gampaha/tests" element={<Testlist />} />
 

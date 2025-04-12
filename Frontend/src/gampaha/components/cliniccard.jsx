@@ -15,7 +15,7 @@ function Cliniccard() {
                 <span className="block text-gray-700 mb-4">
                     Visit our specialized clinics for expert treatment in various fields.
                 </span>
-                <Link to={"/gampaha/scans"}>
+                <Link to={"/gampaha/clinics"}>
                     <button className="bg-blue-600 text-white px-3 py-2 text-base rounded hover:bg-blue-700 transition">
                         Visit Page
                     </button>

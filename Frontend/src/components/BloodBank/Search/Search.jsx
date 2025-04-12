@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Navbar from "../BB_Navbar/NavBar";
+import Footer from "../Footer";
 
 const CampaignSearch = () => {
   const [districts, setDistricts] = useState([]);
@@ -61,6 +62,7 @@ const CampaignSearch = () => {
   };
 
   return (
+    <>
     <div><Navbar />
     <div className="min-h-screen min-w-full bg-purple-50 p-8 margin-top-16">
       <div className="flex items-center justify-center h-screen">
@@ -140,7 +142,10 @@ const CampaignSearch = () => {
       </div>
     </div>
     </div>
+   
     </div>
+    <Footer />
+    </>
   );
   
 };
