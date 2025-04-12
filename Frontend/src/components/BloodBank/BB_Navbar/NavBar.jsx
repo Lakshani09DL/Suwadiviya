@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import NotificationBell from '../Notification';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -40,17 +41,10 @@ const Navbar = () => {
             <Link to="/bloodBank" className="text-gray-700 dark:text-gray-400 hover:text-primary transition duration-300">Home</Link>
             <Link to="/search" className="text-gray-700 dark:text-gray-400 hover:text-primary transition duration-300">Search</Link>
             <Link to="/contact" className="text-gray-700 dark:text-gray-400 hover:text-primary transition duration-300">Contact</Link>
-          </div>
-        </div>
+            <NotificationBell userId={6} />
 
-        {/* Nav Links (Mobile) */}
-        {isOpen && (
-          <div className="lg:hidden px-4 pb-4 bg-neutral-800 text-white rounded-b-lg shadow-lg">
-            <Link to="/bloodBank" className="block py-2 text-gray-500 hover:text-primary transition duration-300">Home</Link>
-            <Link to="/search" className="block py-2 text-gray-500 hover:text-primary transition duration-300">Search</Link>
-            <Link to="/contact" className="block py-2 text-gray-500 hover:text-primary transition duration-300">Contact</Link>
           </div>
-        )}
+        </div>  
       </nav>
     </>
   );
