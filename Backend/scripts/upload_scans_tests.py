@@ -7,7 +7,7 @@ from chromadb.config import Settings
 # Initialize ChromaDB client with persistence
 # Use new ChromaDB client API
 client = chromadb.PersistentClient(path="C:/Users/migar/Suwadiviya/Backend/VectorDB")
-collection = client.get_or_create_collection(name="hospital_scans")
+
 
 
 # Create or load the scans/tests collection

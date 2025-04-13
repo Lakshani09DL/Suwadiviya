@@ -1,13 +1,14 @@
-from utils.retriever import retrieve_hospital_info
+
+from utils.retriever import retrieve_clinic_info
 from llm.gemini_client import client
 from utils.tavily import fetch_web_info  
 
-SIMILARITY_THRESHOLD = 0.35
+SIMILARITY_THRESHOLD = 0.05
 
-async def answer_hospital_info(query: str) -> str:
+async def answer_clinic_schedule(query: str) -> str:
     try:
         # Step 1: Try retrieving from vector DB
-        results = retrieve_hospital_info(query)
+        results = retrieve_clinic_info(query)
         
         if results:
             top_result = results[0]
@@ -15,7 +16,7 @@ async def answer_hospital_info(query: str) -> str:
             
             if similarity >= SIMILARITY_THRESHOLD:
                 text = top_result.get("content", "")  
-                hospital_name = top_result.get("metadata", {}).get("hospital_name", "the hospital")
+                hospital_name = top_result.get("metadata", {}).get("hospital", "the hospital")
                 
                 prompt = f"""
                 You are a helpful medical assistant for the Suwadiviya system.
@@ -49,6 +50,3 @@ async def answer_hospital_info(query: str) -> str:
         
     except Exception as e:
         return f"Error while processing hospital info query: {str(e)}"
-
-
-
