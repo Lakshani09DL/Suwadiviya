@@ -9,3 +9,5 @@ requests
 langchain
 chromadb
 sentence-transformers
+passlib
+python-jose
