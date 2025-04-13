@@ -5,8 +5,8 @@ from pydantic import BaseModel, Field
 class NawalokaClinics(Document):
     clinic_name: str
     location: str
-    dates: Dict[str, str]
-    special_information: str = ""
+    dates: Dict[str, List[str]]
+    special_information: str 
     assigned_doctors: List[str]
 
     class Settings:

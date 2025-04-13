@@ -13,10 +13,10 @@ function NawalokaClinics() {
 
   useEffect(() => {
     axios
-      .get("/api/clinics") // Replace with the correct API endpoint
+      .get("http://127.0.0.1:8000/nawaloka/clinics/cliniclist") // Replace with the correct API endpoint
       .then((response) => {
         console.log(response.data);
-        setClinics(Array.isArray(response.data) ? response.data : []);
+        setClinics(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -26,7 +26,7 @@ function NawalokaClinics() {
 
   const displayClinics = clinics.length > 0 ? clinics : dummyClinics;
   const filteredClinics = displayClinics.filter((clinic) =>
-    clinic.name.toLowerCase().includes(searchTerm.toLowerCase())
+    clinic.clinic_name.toLowerCase().includes(searchTerm.toLowerCase())
   );
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
@@ -60,7 +60,9 @@ function NawalokaClinics() {
           zIndex: 1,
         }}
       >
-        <h3 className="text-xl text-blue-700 font-semibold">{clinic.name}</h3>
+        <h3 className="text-xl text-blue-700 font-semibold">
+          {clinic.clinic_name}
+        </h3>
         <button
           className="text-white bg-blue-700 sm p-2 m-6"
           onClick={() => setSelectedClinic(clinic)}
