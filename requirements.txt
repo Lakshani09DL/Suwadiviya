@@ -7,3 +7,5 @@ pymysql
 google-genai
 requests
 langchain
+chromadb
+sentence-transformers
