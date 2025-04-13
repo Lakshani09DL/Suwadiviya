@@ -9,11 +9,14 @@ from routers.gampaha import tests
 from routers.gampaha import clinics
 from routers.user import users
 
+from routers.colombo import tests as colombo_tests  # Add this import
+from routers.colombo import clinics as colombo_clinics # Add this import
+
 from mongodb import init_db
 
 
 
-from routers import chatbot, blood_bank
+#from routers import chatbot, blood_bank
 from tasks.notifications import router as notifications_router  # Import the router
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.cron import CronTrigger
@@ -41,8 +44,8 @@ async def startup_db_client():
 
 
 
-app.include_router(chatbot.router, prefix='/chatbot', tags=['Chatbot'])
-app.include_router(blood_bank.router, prefix='/blood_bank', tags=['Blood Bank'])
+#app.include_router(chatbot.router, prefix='/chatbot', tags=['Chatbot'])
+#app.include_router(blood_bank.router, prefix='/blood_bank', tags=['Blood Bank'])
 app.include_router(notifications_router, prefix="/notifications", tags=["Notifications"])
 
 
@@ -52,6 +55,9 @@ app.include_router(homagama_clinics.router, prefix='/homagama/clinics', tags=['H
 
 app.include_router(tests.router, prefix='/gampaha/tests', tags=['Gampaha tests'])
 app.include_router(clinics.router, prefix='/gampaha/clinics', tags=['Gampaha clinics'])
+
+app.include_router(colombo_tests.router, prefix='/colombo/tests', tags=['Colombo tests']) # Add this line
+app.include_router(colombo_clinics.router, prefix='/colombo/clinics', tags=['Colombo clinics']) # Add this line
 
 app.include_router(users.router, prefix='/users', tags=['Users'])
 
