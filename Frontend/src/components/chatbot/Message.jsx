@@ -33,13 +33,13 @@ const Message = ({ message }) => {
   return (
     <div className={`flex mb-4 ${isUser ? 'justify-end' : 'justify-start'}`}>
       {!isUser && <Avatar sender={sender} />}
-      
+  
       <div
-        className={`max-w-xs md:max-w-md lg:max-w-lg px-4 py-3 rounded-lg shadow-sm ${
-          isUser
+        className={`relative group max-w-xs md:max-w-md lg:max-w-lg px-4 py-3 rounded-2xl shadow-md transition-all duration-300
+          ${isUser
             ? 'bg-blue-600 text-white rounded-br-none'
-            : 'bg-white text-gray-800 rounded-bl-none border border-gray-200'
-        }`}
+            : 'bg-white text-gray-900 rounded-bl-none border border-gray-200'
+          }`}
       >
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
@@ -47,14 +47,20 @@ const Message = ({ message }) => {
         >
           {text}
         </ReactMarkdown>
-        <span className={`text-xs block mt-1 text-right ${isUser ? 'text-blue-200' : 'text-gray-500'}`}>
+  
+        {/* Timestamp */}
+        <span
+          className={`text-[10px] absolute bottom-1 right-3 opacity-80 group-hover:opacity-100 transition-opacity duration-200 ${
+            isUser ? 'text-blue-200' : 'text-gray-400'
+          }`}
+        >
           {formatTime(timestamp)}
         </span>
       </div>
-      
+  
       {isUser && <Avatar sender={sender} />}
     </div>
   );
-};
+}  
 
 export default Message;
