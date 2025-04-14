@@ -35,7 +35,7 @@ const InputArea = ({ onSendMessage }) => {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyPress={handleKeyPress}
-            className="flex-grow p-3 focus:outline-none resize-none w-full bg-transparent"
+            className="flex-grow p-3 focus:outline-none resize-none w-full bg-transparent text-blue-900 placeholder:text-blue-40"
             placeholder="Type your message..."
             rows="1"
           />
