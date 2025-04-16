@@ -44,6 +44,7 @@ import TMgampaha from "./components/Telemedicine/gampaha";
 
 import "./App.css";
 import ScrollToTop from "./components/ScrollToTop/scrolltotop";
+import BookingPage from "./components/Telemedicine/BookingPage";
 
 function App() {
   return (
@@ -90,6 +91,7 @@ function App() {
 
           <Route path="/telemedicine" element={<Telemedicine />} />
           <Route path="/telemedicine/gampaha" element={<TMgampaha />} />
+          <Route path="/book/:clinicName" element={<BookingPage />} />
         </Routes>
       </Router>
     </div>

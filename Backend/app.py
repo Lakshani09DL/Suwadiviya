@@ -18,7 +18,7 @@ from tasks.notifications import router as notifications_router  # Import the rou
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.cron import CronTrigger
 from tasks.notifications import send_upcoming_campaign_notifications
-
+from routers import telemedicineRoutes
 
 
 app = FastAPI()
@@ -55,6 +55,7 @@ app.include_router(clinics.router, prefix='/gampaha/clinics', tags=['Gampaha cli
 
 app.include_router(users.router, prefix='/users', tags=['Users'])
 
+app.include_router(telemedicineRoutes.router, prefix='/tm-gampaha/clinics', tags=['TM Gampaha Clinics'])
 
 # Set up the scheduler
 #scheduler = BackgroundScheduler()
