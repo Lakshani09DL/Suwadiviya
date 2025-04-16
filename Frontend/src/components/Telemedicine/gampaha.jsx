@@ -1,9 +1,10 @@
 import { motion, useInView } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
-
+import { useNavigate } from "react-router-dom";
 function GampahaCliniclist() {
   const [selectedClinic, setSelectedClinic] = useState(null);
   const [clinics, setClinics] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchClinics = async () => {
@@ -99,18 +100,14 @@ function GampahaCliniclist() {
             <div className="text-center mt-6">
               <button 
                 className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-xl shadow transition"
-                onClick={() => alert("Redirect to telemedicine appointment booking")}
+                onClick={() => navigate(`/book/${selectedClinic.clinic_name}`)}
               >
                 📞 Book Telemedicine Appointment
               </button>
             </div>
 
-            <button 
-              onClick={() => setSelectedClinic(null)} 
-              className="absolute top-2 right-3 text-red-600 text-2xl hover:text-red-800"
-            >
-              &times;
-            </button>
+           
+
           </div>
         </div>
       )}
