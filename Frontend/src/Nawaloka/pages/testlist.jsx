@@ -185,7 +185,7 @@ function NawalokaTest() {
 
   useEffect(() => {
     axios
-      .get("/api/tests") // Replace with the correct API endpoint
+      .get("http://127.0.0.1:8000/nawaloka/scans/nawaloka-test-list") // Replace with the correct API endpoint
       .then((response) => {
         console.log(response.data);
         setTests(Array.isArray(response.data) ? response.data : []);
