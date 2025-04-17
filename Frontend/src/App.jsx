@@ -33,8 +33,12 @@ import NawalokaClinics from "./Nawaloka/pages/cliniclist";
 import NawalokaTestList from "./Nawaloka/pages/testlist";
 import NawalokaScanList from "./Nawaloka/pages/scanlist";
 
+import Telemedicine from "./components/Telemedicine/home";
+import TMgampaha from "./components/Telemedicine/gampaha";
+
 import "./App.css";
 import ScrollToTop from "./components/ScrollToTop/scrolltotop";
+import BookingPage from "./components/Telemedicine/BookingPage";
 
 function App() {
   return (
@@ -76,8 +80,13 @@ function App() {
 
           {/* Other Routes */}
           <Route path="/chat" element={<ChatInterface />} />
+
           <Route path="/bloodBank" element={<BloodBank />} />
           <Route path="/search" element={<Search />} />
+
+          <Route path="/telemedicine" element={<Telemedicine />} />
+          <Route path="/telemedicine/gampaha" element={<TMgampaha />} />
+          <Route path="/book/:clinicName" element={<BookingPage />} />
         </Routes>
       </Router>
     </div>

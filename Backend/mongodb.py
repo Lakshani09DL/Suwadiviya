@@ -17,7 +17,7 @@ from mongo_models.user.user import User
 
 import os
 from dotenv import load_dotenv
-
+from mongo_models.telemedicineModels import TMGampahaClinic
 load_dotenv()
 
 
