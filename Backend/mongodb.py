@@ -9,7 +9,9 @@ from mongo_models.gampaha.gampaha_clinics import GampahaClinics
 
 
 from mongo_models.nawaloka.nawaloka_clinics import NawalokaClinics
+
 from mongo_models.nawaloka.nawaloka_testnscan import NawalokaScanTest
+
 from mongo_models.colombo.colombo_clinics import ColomboClinics # Add this import
 from mongo_models.colombo.colombo_tests import ColomboTests # Add this import
 
@@ -30,8 +32,9 @@ async def init_db():
         database=client.SuwaDiviya, 
 
 
-        document_models=[User, GampahaTests, GampahaClinics, HomagamaClinics, HomagamaScanTest,NawalokaClinics,NawalokaScanTest]
-    
+
+        document_models=[User, GampahaTests, GampahaClinics, HomagamaClinics, HomagamaScanTest,NawalokaClinics,NawalokaScanTest,TMGampahaClinic,Appointment]
+
 
         )
     
