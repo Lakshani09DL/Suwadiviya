@@ -52,7 +52,7 @@ function NawalokaClinics() {
     return (
       <motion.div
         ref={ref}
-        className="bg-slate-50 shadow-lg rounded-xl px-10 py-6 w-full max-w-full mx-auto"
+        className="bg-slate-50 shadow-lg rounded-xl px-10 py-6 w-full max-w-full mx-auto hover:shadow-lg transition-shadow duration-300 flex flex-col justify-between"
         variants={itemVariants}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
@@ -60,11 +60,13 @@ function NawalokaClinics() {
           zIndex: 1,
         }}
       >
-        <h3 className="text-xl text-blue-700 font-semibold">
-          {clinic.clinic_name}
-        </h3>
+        <div>
+          <h3 className="text-xl text-blue-700 font-semibold">
+            {clinic.clinic_name}
+          </h3>
+        </div>
         <button
-          className="text-white bg-blue-700 sm p-2 m-6"
+          className="text-white bg-blue-700 px-4 py-2 rounded-lg hover:bg-blue-800 transition-colors duration-300 mt-4 w-full"
           onClick={() => setSelectedClinic(clinic)}
         >
           View More
@@ -107,7 +109,7 @@ function NawalokaClinics() {
       </div>
 
       <motion.div
-        className="bg-blue-50 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-20 gap-y-20 px-40 py-20"
+        className="bg-blue-50 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-x-10 gap-y-10 px-10 py-20"
         initial="hidden"
         animate="visible"
         style={{
@@ -157,12 +159,12 @@ function NawalokaClinics() {
             className="fixed inset-0 bg-slate-100 bg-opacity-80 flex justify-center items-center z-50 w-screen h-full"
             style={{ zIndex: 1 }}
           >
-            <div className="bg-white rounded-xl p-6 w-96 shadow-lg relative">
-              <h3 className="text-2xl bg-blue-200 text-blue-800 font-semibold p-5 mt-20 mb-10">
+            <div className="bg-white rounded-xl p-6 w-11/12 max-w-3xl shadow-lg relative">
+              <h3 className="text-2xl bg-blue-200 text-blue-800 font-semibold p-5 rounded-t-lg">
                 {selectedClinic.clinic_name}
               </h3>
-              <div className="bg-slate-300 rounded-xl p-6 w-full max-w-full mx-auto">
-                <p className="text-xl b text-black font-semibold p-5 m-3">
+              <div className="bg-slate-300 rounded-xl p-6 w-full max-w-full mx-auto flex flex-col gap-4">
+                <p className="text-xl b text-black font-semibold ">
                   <strong>Location:</strong> {selectedClinic.location}
                 </p>
                 <p className="text-xl text-black font-semibold">
