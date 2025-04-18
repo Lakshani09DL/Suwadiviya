@@ -56,6 +56,7 @@ app.include_router(clinics.router, prefix='/gampaha/clinics', tags=['Gampaha cli
 app.include_router(users.router, prefix='/users', tags=['Users'])
 
 app.include_router(telemedicineRoutes.router, prefix='/tm-gampaha/clinics', tags=['TM Gampaha Clinics'])
+app.include_router(telemedicineRoutes.router, tags=["Appointments"])
 
 # Set up the scheduler
 #scheduler = BackgroundScheduler()
