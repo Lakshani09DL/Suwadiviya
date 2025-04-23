@@ -9,7 +9,11 @@ from mongo_models.gampaha.gampaha_clinics import GampahaClinics
 
 
 from mongo_models.nawaloka.nawaloka_clinics import NawalokaClinics
+
+
 from mongo_models.nawaloka.nawaloka_testnscan import NawalokaScanTest
+
+
 from mongo_models.colombo.colombo_clinics import ColomboClinics # Add this import
 from mongo_models.colombo.colombo_tests import ColomboTests # Add this import
 
@@ -17,7 +21,7 @@ from mongo_models.user.user import User
 
 import os
 from dotenv import load_dotenv
-from mongo_models.telemedicineModels import TMGampahaClinic
+from mongo_models.telemedicineModels import TMGampahaClinic, AppointmentRequest, Appointment
 load_dotenv()
 
 
@@ -31,8 +35,7 @@ async def init_db():
 
 
 
-        document_models=[User, GampahaTests, GampahaClinics, HomagamaClinics, HomagamaScanTest,NawalokaClinics,NawalokaScanTest,TMGampahaClinic]
-    
+        document_models=[User, GampahaTests, GampahaClinics, HomagamaClinics, HomagamaScanTest,NawalokaClinics,NawalokaScanTest,TMGampahaClinic,Appointment]
 
 
         )

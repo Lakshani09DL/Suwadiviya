@@ -7,6 +7,7 @@ function BookingPage() {
   const [selectedSlot, setSelectedSlot] = useState("");
   const [name, setName] = useState("");
   const [dob, setDob] = useState("");
+  const [zoomLink, setZoomLink] = useState("");
 
   useEffect(() => {
     const fetchTimeSlots = async () => {
@@ -22,93 +23,108 @@ function BookingPage() {
     fetchTimeSlots();
   }, [clinicName]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form Submitted:", {
-      name,
-      dob,
-      selectedSlot,
-      clinic: clinicName,
-    });
+  const handleConfirm = async () => {
+    if (!name || !dob || !selectedSlot) {
+      alert("Please fill all fields and select a slot");
+      return;
+    }
 
-    // You can send the data to backend using POST here
+    try {
+        const response = await fetch("http://localhost:8000/tm-gampaha/clinics/appointments/book", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          dob,
+          clinic_name: clinicName,
+          time_slot: selectedSlot,
+        }),
+      });
+
+      const data = await response.json();
+      setZoomLink(data.zoom_link); // Show generated link
+    } catch (err) {
+      console.error("Booking failed:", err);
+    }
   };
 
   return (
     <div className="p-8 max-w-xl mx-auto">
-      <h1 className="text-3xl font-bold text-blue-900 mb-6 bg-center bg-no-repeat bg-cover py-4 rounded-lg shadow-md text-center">
-        Book Telemedicine Appointment for {clinicName}
+      <h1 className="text-3xl font-bold text-blue-900 mb-6">
+        Book Appointment - {clinicName}
       </h1>
 
-      <form onSubmit={handleSubmit} className="bg-white p-6 rounded-xl shadow space-y-4">
+      <div className="space-y-4">
         <div>
-          <label className="block font-semibold mb-1">👤 Name</label>
+          <label className="block mb-1 font-medium">Name</label>
           <input
             type="text"
-            className="w-full border px-3 py-2 rounded"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            required
+            className="w-full border rounded px-3 py-2"
           />
         </div>
 
         <div>
-          <label className="block font-semibold mb-1">🎂 Date of Birth</label>
+          <label className="block mb-1 font-medium">Date of Birth</label>
           <input
             type="date"
-            className="w-full border px-3 py-2 rounded"
             value={dob}
             onChange={(e) => setDob(e.target.value)}
-            required
+            className="w-full border rounded px-3 py-2"
           />
         </div>
 
         <div>
-  <label className="block font-semibold mb-2">🕒 Select a Time Slot</label>
-  {timeSlots.length === 0 ? (
-    <p className="text-gray-500">No available slots.</p>
-  ) : (
-            <div className="space-y-2 max-h-60 overflow-y-auto">
-              {timeSlots.map((slot, index) => {
-                const label = `${slot.date} at ${slot.time}`;
-                const isAvailable = slot.status === "available";
+          <label className="block font-semibold mb-2">🕒 Select a Time Slot</label>
+          <div className="space-y-2 max-h-60 overflow-y-auto">
+            {timeSlots.map((slot, index) => {
+              const label = `${slot.date} at ${slot.time}`;
+              const isAvailable = slot.status === "available";
 
-                return (
-                  <div
-                    key={index}
-                    className={`flex items-center justify-between p-3 rounded-md ${
-                      isAvailable ? "bg-green-100" : "bg-red-100"
-                    }`}
-                  >
-                    <label className="flex items-center text-sm text-black w-full">
-                      <input
-                        type="radio"
-                        name="timeSlot"
-                        value={label}
-                        onChange={(e) => setSelectedSlot(e.target.value)}
-                        disabled={!isAvailable}
-                        className="mr-3"
-                      />
-                      {label}
-                    </label>
-                    <span className="text-xs font-semibold uppercase tracking-wide text-gray-700">
-                      {slot.status}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
-          )}
+              return (
+                <div
+                  key={index}
+                  className={`flex items-center justify-between p-3 rounded-md ${
+                    isAvailable ? "bg-green-100" : "bg-red-100"
+                  }`}
+                >
+                  <label className="flex items-center text-sm text-black w-full">
+                    <input
+                      type="radio"
+                      name="timeSlot"
+                      value={label}
+                      onChange={(e) => setSelectedSlot(e.target.value)}
+                      disabled={!isAvailable}
+                      className="mr-3"
+                    />
+                    {label}
+                  </label>
+                  <span className="text-xs font-semibold uppercase tracking-wide text-gray-700">
+                    {slot.status}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
         </div>
 
-
         <button
-          type="submit"
-          className="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg font-semibold"
+          onClick={handleConfirm}
+          className="bg-blue-700 text-white px-6 py-2 rounded-lg mt-4 hover:bg-blue-800 transition"
         >
-          ✅ Confirm Appointment
+          Confirm Appointment
         </button>
-      </form>
+
+        {zoomLink && (
+          <div className="mt-6 p-4 border rounded bg-green-50">
+            <p className="font-semibold text-green-700">✅ Appointment confirmed!</p>
+            <a href={zoomLink} target="_blank" className="text-blue-700 underline">
+              Join Zoom Meeting
+            </a>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

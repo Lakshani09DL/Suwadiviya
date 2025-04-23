@@ -15,3 +15,22 @@ class TMGampahaClinic(Document):
 
     class Settings:
         name = "TMgampahaClinicSlots"  # MongoDB collection name
+
+class AppointmentRequest(BaseModel):
+    name: str
+    dob: str
+    clinic_name: str
+    time_slot: str
+
+class Appointment(Document):
+    name: str
+    dob: str
+    clinic_name: str
+    time_slot: str  # Format: "YYYY-MM-DD at HH:MM AM/PM"
+    zoom_link: str
+
+    class Settings:
+        name = "GampahaTMappointments"  # This will be your MongoDB collection name
+
+
+        
