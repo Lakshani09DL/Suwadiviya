@@ -32,7 +32,7 @@ Examples:
 7. Query: "Where is the diabetes clinic?"
    Intent: clinic_schedule
 Please return only the intent type out of [emergency_advice, hospital_info, clinic_schedule, test_info, nearest_hospital, general_help]. No explanations needed.
-Locations, Time and Date related to clinics come under clinic_schedule.
+Locations, Time and Date related to clinics come under clinic_schedule. Also if user inquires about the type of a doctor suitable for a specific disease or symptoms intent should be general help.
 Now classify the following query:
 Query: \"{user_query}\"
 Intent:
