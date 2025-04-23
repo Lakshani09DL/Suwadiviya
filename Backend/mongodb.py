@@ -35,7 +35,7 @@ async def init_db():
 
 
 
-        document_models=[User, GampahaTests, GampahaClinics, HomagamaClinics, HomagamaScanTest,NawalokaClinics,NawalokaScanTest,TMGampahaClinic,Appointment]
+        document_models=[User, GampahaTests, GampahaClinics, HomagamaClinics, HomagamaScanTest,NawalokaClinics,ColomboClinics, ColomboTests,NawalokaScanTest,TMGampahaClinic,Appointment]
 
 
         )
