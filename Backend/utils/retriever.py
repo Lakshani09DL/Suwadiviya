@@ -14,7 +14,7 @@ def retrieve_hospital_info(query, n_results=1):
     
     # Get embeddings and query
     results = collection.query(
-        query_embeddings=[query_embedding],  
+        query_texts=query,  
         n_results=n_results,  
         include=["documents", "metadatas", "distances"]
     )
@@ -31,7 +31,7 @@ def retrieve_hospital_info(query, n_results=1):
             formatted_results.append({
                 "content": doc,
                 "metadata": metadata,
-                "similarity": 1 - distance,  # Convert distance to similarity score
+                "similarity":1- distance,  # Convert distance to similarity score
                 "rank": i + 1
             })
     
@@ -103,7 +103,7 @@ def retrieve_test_info(query, n_results=5):
             formatted_results.append({
                 "content": doc,
                 "metadata": metadata,
-                "similarity": 1 - distance,  # Convert distance to similarity score
+                "similarity": distance,  # Convert distance to similarity score
                 "rank": i + 1
             })
     
@@ -111,8 +111,8 @@ def retrieve_test_info(query, n_results=5):
 
 # Example usage
 if __name__ == "__main__":
-    query = "Is there a Blood sugar test in National Hospital of Sri Lanka?"
-    results = retrieve_test_info(query)
+    query = "The contact number of Homagama Base Hospital"
+    results = retrieve_hospital_info(query)
     
     # Print results in a readable format
     for result in results:

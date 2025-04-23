@@ -9,7 +9,7 @@ function ChatInterface() {
   const [messages, setMessages] = useState([]);
   const [isTyping, setIsTyping] = useState(false);
 
-  const handleSendMessage = (text) => {
+  const handleSendMessage = async (text) => {
     if (!text.trim()) return;
 
     const userMessage = {
@@ -22,43 +22,47 @@ function ChatInterface() {
     setMessages(prev => [...prev, userMessage]);
     setIsTyping(true);
 
-    setTimeout(() => {
-      setIsTyping(false);
-      let botReply = "";
+    try {
+      
+      const response = await fetch('http://127.0.0.1:8000/chatbot/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ query: text }),
+      });
 
-      if (text.toLowerCase().includes("what is cpr")) {
-        botReply = `### CPR (Cardiopulmonary Resuscitation)
-
-CPR is a life-saving technique used in emergencies when someone's heartbeat or breathing has stopped. It involves:
-- **Chest compressions** to manually pump blood through the heart
-- **Rescue breaths** to provide oxygen to the lungs
-
-## Steps for Performing CPR:
-
-1. **Call emergency services** immediately (e.g., 911)
-2. **Place the person** on their back on a firm surface
-3. **Kneel down** beside them
-4. **Start chest compressions**:
-   - Place hands on the center of the chest
-   - Push down hard and fast (2 inches deep)
-5. **If trained**, provide rescue breaths after every 30 compressions
-6. **Continue CPR** until help arrives
-
-> **Important**: CPR can double or triple chances of survival after cardiac arrest`;
-      } else {
-        botReply = `I'm a demo chatbot. For this example, I respond to "What is CPR?" with detailed information. Try asking about CPR!`;
+      if (!response.ok) {
+        throw new Error(`API request failed with status ${response.status}`);
       }
+
+      const data = await response.json();
 
       setMessages(prev => [
         ...prev,
         {
-          text: botReply,
+          text: data.response,
           sender: 'bot',
           timestamp: new Date(),
           id: Date.now() + 1
         }
       ]);
-    }, 1500);
+    } catch (error) {
+      console.error('Error fetching response:', error);
+      
+      // Show error message to user
+      setMessages(prev => [
+        ...prev,
+        {
+          text: "Sorry, I couldn't process your request. Please try again later.",
+          sender: 'bot',
+          timestamp: new Date(),
+          id: Date.now() + 1
+        }
+      ]);
+    } finally {
+      setIsTyping(false);
+    }
   };
 
   return (
