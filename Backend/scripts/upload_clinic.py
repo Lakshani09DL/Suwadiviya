@@ -5,7 +5,7 @@ import chromadb
 from chromadb.config import Settings
 
 client = chromadb.PersistentClient(path="C:/Users/migar/Suwadiviya/Backend/VectorDB")
-collection = client.get_or_create_collection(name="hospital_clinics")
+collection = client.get_or_create_collection(name="clinics")
 
 embedder = SentenceTransformer("all-MiniLM-L6-v2")
 
@@ -33,4 +33,4 @@ def process_file(file_path, hospital_name):
         doc_id = f"{hospital_name.lower().replace(' ', '_')}_{str(uuid4())[:8]}"
         collection.add(documents=[doc], metadatas=[meta], embeddings=[embedding], ids=[doc_id])
     print(f"✅ Loaded {len(chunks)} documents from {file_path}")
-process_file("C:/Users/migar/Suwadiviya/Backend/suwadiviya_data/clinics/National Hospital of Sri Lanka (NHSL).md", "National Hospital of Sri Lanka (NHSL)")
+process_file("C:/Users/migar/Suwadiviya/Backend/suwadiviya_data/clinic/District General Hospital of Gampaha.md", "District General Hospital of Gampaha")
