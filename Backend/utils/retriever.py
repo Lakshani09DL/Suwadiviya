@@ -38,10 +38,10 @@ def retrieve_hospital_info(query, n_results=1):
     return formatted_results
 
 
-def retrieve_clinic_info(query, n_results=8):
+def retrieve_clinic_info(query, n_results=3):
     # Initialize Chroma client and embedding model
     client = chromadb.PersistentClient(path="C:/Users/migar/Suwadiviya/Backend/VectorDB")
-    collection = client.get_or_create_collection(name="hospital_clinics")
+    collection = client.get_or_create_collection(name="clinics")
     
     embedder = SentenceTransformer("all-MiniLM-L6-v2")
     
@@ -50,7 +50,7 @@ def retrieve_clinic_info(query, n_results=8):
     
     # Get embeddings and query
     results = collection.query(
-        query_texts=query,  
+        query_embeddings=query_embedding,  
         n_results=n_results,  
         include=["documents", "metadatas", "distances"]
     )
@@ -86,7 +86,7 @@ def retrieve_test_info(query, n_results=8):
     
     # Get embeddings and query
     results = collection.query(
-        query_embeddings=query_embedding,  
+        query_texts=query,  
         n_results=n_results,  
         include=["documents", "metadatas", "distances"]
     )
@@ -103,7 +103,7 @@ def retrieve_test_info(query, n_results=8):
             formatted_results.append({
                 "content": doc,
                 "metadata": metadata,
-                "similarity": 1-distance,  # Convert distance to similarity score
+                "similarity": distance,  # Convert distance to similarity score
                 "rank": i + 1
             })
     
@@ -111,7 +111,7 @@ def retrieve_test_info(query, n_results=8):
 
 # Example usage
 if __name__ == "__main__":
-    query = "Cardiology Clinic available in Homagama Base Hospital"
+    query = "does colombo national hospital sri lanka has neurology clinic?"
     results = retrieve_clinic_info(query)
     
     # Print results in a readable format
