@@ -1,4 +1,4 @@
-import re
+#import re
 from uuid import uuid4
 from sentence_transformers import SentenceTransformer
 import chromadb
