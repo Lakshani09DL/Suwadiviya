@@ -3,7 +3,7 @@ from utils.retriever import retrieve_clinic_info
 from llm.gemini_client import client
 from utils.tavily import fetch_web_info  
 
-SIMILARITY_THRESHOLD = 0.05
+SIMILARITY_THRESHOLD = 0.5
 
 async def answer_clinic_schedule(query: str) -> str:
     try:

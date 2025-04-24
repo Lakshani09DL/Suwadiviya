@@ -9,7 +9,7 @@ const Avatar = ({ sender }) => {
         } mt-1`}
       >
         <span className={`text-sm font-bold ${isUser ? 'text-white' : 'text-blue-600'}`}>
-          {isUser ? 'You' : 'AI'}
+          {isUser ? 'You' : 'Rev'}
         </span>
       </div>
     );

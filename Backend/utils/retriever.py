@@ -50,7 +50,7 @@ def retrieve_clinic_info(query, n_results=5):
     
     # Get embeddings and query
     results = collection.query(
-        query_embeddings=[query_embedding],  
+        query_embeddings=query,  
         n_results=n_results,  
         include=["documents", "metadatas", "distances"]
     )
@@ -86,7 +86,7 @@ def retrieve_test_info(query, n_results=5):
     
     # Get embeddings and query
     results = collection.query(
-        query_embeddings=[query_embedding],  
+        query_embeddings=query,  
         n_results=n_results,  
         include=["documents", "metadatas", "distances"]
     )
@@ -103,7 +103,7 @@ def retrieve_test_info(query, n_results=5):
             formatted_results.append({
                 "content": doc,
                 "metadata": metadata,
-                "similarity": distance,  # Convert distance to similarity score
+                "similarity": 1-distance,  # Convert distance to similarity score
                 "rank": i + 1
             })
     
