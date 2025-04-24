@@ -4,7 +4,7 @@ from sentence_transformers import SentenceTransformer
 
 def retrieve_hospital_info(query, n_results=1):
     # Initialize Chroma client and embedding model
-    client = chromadb.PersistentClient(path="C:/Users/migar/Suwadiviya/Backend/VectorDB")
+    client = chromadb.PersistentClient(path="F:\Suwadiviya\Suwadiviya\Backend\VectorDB")
     collection = client.get_or_create_collection(name="hospital_info")
     
     embedder = SentenceTransformer("all-MiniLM-L6-v2")
@@ -40,7 +40,7 @@ def retrieve_hospital_info(query, n_results=1):
 
 def retrieve_clinic_info(query, n_results=5):
     # Initialize Chroma client and embedding model
-    client = chromadb.PersistentClient(path="C:/Users/migar/Suwadiviya/Backend/VectorDB")
+    client = chromadb.PersistentClient(path="F:\Suwadiviya\Suwadiviya\Backend\VectorDB")
     collection = client.get_or_create_collection(name="hospital_clinics")
     
     embedder = SentenceTransformer("all-MiniLM-L6-v2")
@@ -76,7 +76,7 @@ def retrieve_clinic_info(query, n_results=5):
 
 def retrieve_test_info(query, n_results=5):
     # Initialize Chroma client and embedding model
-    client = chromadb.PersistentClient(path="C:/Users/migar/Suwadiviya/Backend/VectorDB")
+    client = chromadb.PersistentClient(path="F:\Suwadiviya\Suwadiviya\Backend\VectorDB")
     collection = client.get_or_create_collection(name="hospital_scans")
     
     embedder = SentenceTransformer("all-MiniLM-L6-v2")
