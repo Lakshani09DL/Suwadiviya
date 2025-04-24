@@ -18,9 +18,9 @@ const EmptyState = () => {
               />
             </svg>
           </div>
-          <h2 className="text-xl font-semibold mb-5">No messages yet</h2>
+          <h2 className="text-xl font-semibold mb-5 text-blue-900">Revana is here to help!</h2>
           <p className="text-base text-blue-600 text-center">
-            Try asking <span className="font-semibold">"What is CPR?"</span> to see a detailed markdown response.
+            I'm your <span className="font-semibold">AI assistant</span> for emergencies and everyday medical and hospital related information.<br /> <span className="font-semibold">How can I help you?</span>
           </p>
         </div>
       </div>

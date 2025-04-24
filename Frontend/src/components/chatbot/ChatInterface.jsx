@@ -4,6 +4,8 @@ import Header from './Header';
 import ChatArea from './ChatArea';
 import InputArea from './InputArea';
 import EmptyState from './EmptyState';
+import VideoMessage from './VideoMessage';
+
 
 function ChatInterface() {
   const [messages, setMessages] = useState([]);
@@ -37,6 +39,17 @@ function ChatInterface() {
       }
 
       const data = await response.json();
+
+      if (data.videos) {
+        setMessages(prev => [
+          ...prev,
+          {
+            type: 'videos',
+            videos: data.videos,
+            id: Date.now() + 1,
+          },
+        ]);
+      }
 
       setMessages(prev => [
         ...prev,

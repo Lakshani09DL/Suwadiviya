@@ -2,6 +2,8 @@
 import { useRef, useEffect } from 'react';
 import Message from './Message';
 import TypingIndicator from './TypingIndicator';
+import VideoMessage from './VideoMessage';
+
 
 const ChatArea = ({ messages, isTyping }) => {
   const messagesEndRef = useRef(null);
@@ -16,9 +18,13 @@ const ChatArea = ({ messages, isTyping }) => {
 
   return (
     <div className="max-w-3xl mx-auto">
-      {messages.map((msg) => (
-        <Message key={msg.id} message={msg} />
-      ))}
+      {messages.map((msg) =>
+        msg.type === 'videos' ? (
+          <VideoMessage key={msg.id} videos={msg.videos} />
+        ) : (
+          <Message key={msg.id} message={msg} />
+        )
+      )}
       
       {isTyping && <TypingIndicator />}
       <div ref={messagesEndRef} />

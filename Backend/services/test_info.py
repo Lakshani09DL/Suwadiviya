@@ -2,7 +2,7 @@ from utils.retriever import retrieve_test_info
 from llm.gemini_client import client
 from utils.tavily import fetch_web_info  
 
-SIMILARITY_THRESHOLD = 0.05
+SIMILARITY_THRESHOLD = 0.5
 
 async def answer_test_info(query: str) -> str:
     try:
