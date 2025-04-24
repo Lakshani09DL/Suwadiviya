@@ -4,7 +4,7 @@ from llm.gemini_client import client
 async def handle_emergency(user_query: str):
     prompt = f"""
     You are an AI emergency assistant. Provide step-by-step or suitable emergency instructions for "{user_query}".
-    If the condition is life-threatening, mention seeking immediate medical help.
+    If the condition is life-threatening, mention seeking immediate medical help. 1990 is the Sri Lankan ambulance service number and mention to call that number only.
     """
     try:
         response = client.models.generate_content(
