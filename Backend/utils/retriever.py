@@ -38,7 +38,7 @@ def retrieve_hospital_info(query, n_results=1):
     return formatted_results
 
 
-def retrieve_clinic_info(query, n_results=5):
+def retrieve_clinic_info(query, n_results=8):
     # Initialize Chroma client and embedding model
     client = chromadb.PersistentClient(path="C:/Users/migar/Suwadiviya/Backend/VectorDB")
     collection = client.get_or_create_collection(name="hospital_clinics")
@@ -50,7 +50,7 @@ def retrieve_clinic_info(query, n_results=5):
     
     # Get embeddings and query
     results = collection.query(
-        query_embeddings=query,  
+        query_texts=query,  
         n_results=n_results,  
         include=["documents", "metadatas", "distances"]
     )
@@ -67,14 +67,14 @@ def retrieve_clinic_info(query, n_results=5):
             formatted_results.append({
                 "content": doc,
                 "metadata": metadata,
-                "similarity": 1 - distance,  # Convert distance to similarity score
+                "similarity": 1- distance,  # Convert distance to similarity score
                 "rank": i + 1
             })
     
     return formatted_results
 
 
-def retrieve_test_info(query, n_results=5):
+def retrieve_test_info(query, n_results=8):
     # Initialize Chroma client and embedding model
     client = chromadb.PersistentClient(path="C:/Users/migar/Suwadiviya/Backend/VectorDB")
     collection = client.get_or_create_collection(name="hospital_scans")
@@ -86,7 +86,7 @@ def retrieve_test_info(query, n_results=5):
     
     # Get embeddings and query
     results = collection.query(
-        query_embeddings=query,  
+        query_embeddings=query_embedding,  
         n_results=n_results,  
         include=["documents", "metadatas", "distances"]
     )
@@ -111,8 +111,8 @@ def retrieve_test_info(query, n_results=5):
 
 # Example usage
 if __name__ == "__main__":
-    query = "The contact number of Homagama Base Hospital"
-    results = retrieve_hospital_info(query)
+    query = "Cardiology Clinic available in Homagama Base Hospital"
+    results = retrieve_clinic_info(query)
     
     # Print results in a readable format
     for result in results:
