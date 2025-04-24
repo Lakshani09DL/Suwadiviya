@@ -736,7 +736,7 @@ function ColomboTest() {
           zIndex: 1,
         }}
       >
-        Welcome to Colombo District General Hospital Scan Service!
+        Welcome to Colombo National Hospital Scan Service!
       </motion.h2>
 
       {/* Search Bar */}
