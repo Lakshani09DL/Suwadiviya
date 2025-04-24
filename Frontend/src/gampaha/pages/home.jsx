@@ -47,6 +47,12 @@ function Home() {
       btn: "Click here",
       route: "/telemedicine",
     },
+    {
+      title: "Vaccine Chart by Age",
+      desc: "Find out which vaccines you or your child need based on age. Stay updated on recommended immunizations.",
+      btn: "View Chart",
+      route: "/vaccine",
+    }
   ];
 
 

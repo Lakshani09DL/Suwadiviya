@@ -5,6 +5,8 @@ import React from "react";
 import Login from "./components/Login/login";
 import Register from "./components/Register/register";
 
+import VaccineChart from "./components/Vaccination/vaccine";
+
 import ChatInterface from "./components/chatbot/ChatInterface";
 import BloodBank from "./components/BloodBank/Home/home";
 import Search from "./components/BloodBank/Search/Search";
@@ -80,6 +82,8 @@ function App() {
 
           {/* Other Routes */}
           <Route path="/chat" element={<ChatInterface />} />
+
+          <Route path="/vaccine" element={<VaccineChart />} />
 
           <Route path="/bloodBank" element={<BloodBank />} />
           <Route path="/search" element={<Search />} />
