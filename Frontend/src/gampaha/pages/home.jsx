@@ -41,6 +41,12 @@ function Home() {
       btn: "Scroll Down for Visit Hospitals",
       type: "anchor",
     },
+    {
+      title: "Telemedicine Service.",
+      desc: "Access top healthcare professionals from the comfort of your home.",
+      btn: "Click here",
+      route: "/telemedicine",
+    },
   ];
 
 
