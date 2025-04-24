@@ -49,7 +49,7 @@ async def startup_db_client():
 
 
 app.include_router(chatbot.router, prefix='/chatbot', tags=['Chatbot'])
-#app.include_router(blood_bank.router, prefix='/blood_bank', tags=['Blood Bank'])
+app.include_router(blood_bank.router, prefix='/blood_bank', tags=['Blood Bank'])
 app.include_router(notifications_router, prefix="/notifications", tags=["Notifications"])
 
 

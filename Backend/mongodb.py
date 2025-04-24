@@ -17,7 +17,7 @@ from mongo_models.user.user import User
 
 import os
 from dotenv import load_dotenv
-from mongo_models.telemedicineModels import TMGampahaClinic, AppointmentRequest, Appointment
+from mongo_models.telemedicineModels import TMGampahaClinic, Appointment
 load_dotenv()
 
 
@@ -30,7 +30,7 @@ async def init_db():
         database=client.SuwaDiviya, 
 
 
-        document_models=[User, GampahaTests, GampahaClinics, HomagamaClinics, HomagamaScanTest,NawalokaClinics,NawalokaScanTest]
+        document_models=[User, GampahaTests, GampahaClinics, HomagamaClinics, HomagamaScanTest,NawalokaClinics,NawalokaScanTest,TMGampahaClinic, Appointment]
     
 
         )
