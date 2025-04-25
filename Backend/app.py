@@ -20,7 +20,7 @@ from mongodb import init_db
 
 
 
-from routers import chatbot, blood_bank
+from routers import chatbot, blood_bank,map
 from tasks.notifications import router as notifications_router  # Import the router
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.cron import CronTrigger
@@ -51,7 +51,7 @@ async def startup_db_client():
 app.include_router(chatbot.router, prefix='/chatbot', tags=['Chatbot'])
 app.include_router(blood_bank.router, prefix='/blood_bank', tags=['Blood Bank'])
 app.include_router(notifications_router, prefix="/notifications", tags=["Notifications"])
-
+app.include_router(map.router, prefix='/map', tags=["Map"])
 
 app.include_router(homagama_test_scan.router, prefix='/homagama/tests', tags=['Homagama tests'])
 app.include_router(homagama_test_scan.router, prefix='/homagama/scans', tags=['Homagama scans'])
