@@ -33,4 +33,4 @@ def process_file(file_path, hospital_name):
         doc_id = f"{hospital_name.lower().replace(' ', '_')}_{str(uuid4())[:8]}"
         collection.add(documents=[doc], metadatas=[meta], embeddings=[embedding], ids=[doc_id])
     print(f"✅ Loaded {len(chunks)} documents from {file_path}")
-process_file("F:/Suwadiviya/Suwadiviya/Backend/suwadiviya_data/clinics/National Hospital of Sri Lanka (NHSL).md", "National Hospital of Sri Lanka (NHSL).md")
+process_file("F:/Suwadiviya/Suwadiviya/Backend/suwadiviya_data/clinic/Homagama Base Hospital.md", "Homagama Base Hospital.md")
