@@ -519,7 +519,7 @@ function ColomboTest() {
           zIndex: 1,
         }}
       >
-        Welcome to Colombo District General Hospital Test Service!
+        Welcome to Colombo National Hospital Test Service!
       </motion.h2>
 
       {/* Search Bar */}

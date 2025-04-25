@@ -111,7 +111,7 @@ def retrieve_test_info(query, n_results=8):
 
 # Example usage
 if __name__ == "__main__":
-    query = "does colombo national hospital sri lanka has neurology clinic?"
+    query = "Schedule of Homagama Base Hospital Cardiology clinic"
     results = retrieve_clinic_info(query)
     
     # Print results in a readable format
