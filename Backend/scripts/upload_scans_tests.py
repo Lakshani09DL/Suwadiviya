@@ -6,7 +6,9 @@ from chromadb.config import Settings
 
 # Initialize ChromaDB client with persistence
 # Use new ChromaDB client API
+
 client = chromadb.PersistentClient(path="D:/UOM/GitHub/Suwadiviya/Backend/VectorDB")
+
 
 
 
@@ -52,7 +54,7 @@ def process_file(file_path, hospital_name):
     print(f"✅ Loaded {len(chunks)} documents from {file_path}")
 
 # Example usage
-process_file("C:/Users/migar/Suwadiviya/Backend/suwadiviya_data/scans_tests/District General Hospital Gampaha .md", "District General Hospital Gampaha")
+process_file("E:/SuwaDiviya/Suwadiviya/Backend/suwadiviya_data/scans_tests/National Hospital of Sri Lanka.md", "Homagama Base Hospital")
 
 process_file("D:/UOM/GitHub/Suwadiviya/Backend/suwadiviya_data/scans_tests/Homagama Base Hospital.md", "Base Hospital of Homagama")
 process_file("D:/UOM/GitHub/Suwadiviya/Backend/suwadiviya_data/scans_tests/National Hospital of Sri Lanka.md", "National Hospital of Colombo")

@@ -13,7 +13,7 @@ async def answer_clinic_schedule(query: str) -> str:
 
         # Process vector DB results
         if results:
-            top_results = results[:3]  # Take top 3 results
+            top_results = results[:2]  # Take top 2 results
             
             for result in top_results:
                 similarity = result.get("similarity", 0.0)
@@ -38,7 +38,7 @@ async def answer_clinic_schedule(query: str) -> str:
             The user asked: "{query}"
             Here's information retrieved from {hospitals_string} and online sources:\n\n{combined_text}
             
-            Please respond with a clear, concise, and helpful answer based on the above info.
+            Please respond with a clear, concise, and helpful answer based on the above info. Also please don't mention that you're not giving up to date information.
             """
             
             response = client.models.generate_content(
