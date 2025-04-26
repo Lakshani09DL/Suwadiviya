@@ -5,7 +5,7 @@ from sentence_transformers import SentenceTransformer
 def retrieve_hospital_info(query, n_results=1):
     # Initialize Chroma client and embedding model
 
-    client = chromadb.PersistentClient(path="D:/UOM/GitHub/Suwadiviya/Backend/VectorDB")
+    client = chromadb.PersistentClient(path="C:/Users/migar/Suwadiviya/Backend/VectorDB")
 
     collection = client.get_or_create_collection(name="hospital_info")
     
@@ -43,7 +43,7 @@ def retrieve_hospital_info(query, n_results=1):
 def retrieve_clinic_info(query, n_results=3):
     # Initialize Chroma client and embedding model
 
-    client = chromadb.PersistentClient(path="D:/UOM/GitHub/Suwadiviya/Backend/VectorDB")
+    client = chromadb.PersistentClient(path="C:/Users/migar/Suwadiviya/Backend/VectorDB")
 
     collection = client.get_or_create_collection(name="clinics")
     
@@ -81,7 +81,7 @@ def retrieve_clinic_info(query, n_results=3):
 def retrieve_test_info(query, n_results=8):
     # Initialize Chroma client and embedding model
 
-    client = chromadb.PersistentClient(path="D:/UOM/GitHub/Suwadiviya/Backend/VectorDB")
+    client = chromadb.PersistentClient(path="C:/Users/migar/Suwadiviya/Backend/VectorDB")
 
     collection = client.get_or_create_collection(name="hospital_scans")
     
