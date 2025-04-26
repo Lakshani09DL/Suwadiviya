@@ -4,7 +4,9 @@ from sentence_transformers import SentenceTransformer
 import chromadb
 from chromadb.config import Settings
 
-client = chromadb.PersistentClient(path="E:\SuwaDiviya\Suwadiviya\Backend\VectorDB")
+
+client = chromadb.PersistentClient(path="D:/UOM/GitHub/Suwadiviya/Backend/VectorDB")
+
 collection = client.get_or_create_collection(name="hospital_info")
 
 embedder = SentenceTransformer("all-MiniLM-L6-v2")
@@ -38,4 +40,7 @@ def process_file(file_path):
         collection.add(documents=[doc], metadatas=[meta], embeddings=[embedding], ids=[doc_id])
     print(f"✅ Loaded {len(chunks)} documents from {file_path}")
 
-process_file("E:/SuwaDiviya/Suwadiviya/Backend/suwadiviya_data/info/General Information of Hospitals.md")
+
+process_file("D:/UOM/GitHub/Suwadiviya/Backend/suwadiviya_data/info/General Information of Hospitals.md")
+
+
